@@ -1,0 +1,15 @@
+<div class='text-center container-fluid'>
+  
+  <h1> {{ denomination }} {{ seriesName | titlecase }} </h1>
+
+  <button class='btn btn-sm' (click)="sortByProperty('year')"> Sort by date </button>
+  <button class='btn btn-sm' (click)="sortByProperty('mintage')"> Sort by mintage </button>
+
+  <div class='container text-center' *ngFor="let coin of coins">
+    <div>
+      <a routerLink="/{{ this.url }}/{{ coin.yearAndMintmark() }}">{{ coin.yearAndMintmark() }}</a>
+      ({{ coin.mintage | number }} minted)
+    </div>
+  </div>
+
+</div>

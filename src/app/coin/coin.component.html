@@ -1,0 +1,15 @@
+<h1 class='text-center'> 
+      
+  <div> 
+    <a routerLink="/coins/{{coin.denomination}}/{{ coin.series | slugify }}">{{coin.series}}</a> <img src={{coin.generic_img_url}} class='thumb'>
+  </div>
+  <div> {{ coin.yearAndMintmark() }} {{ coin.denomination }} </div>
+</h1>
+
+<div class='container text-center'>
+  <div> Denomination: {{ coin.denomination }} </div>
+  <div> Mintage: {{ coin.mintage | number }} </div>
+  <div> Composition: {{ coin.metals() | titlecase }} </div>
+  
+  <a href="https://www.pcgs.com/coinfacts/coin/{{ coin.yearAndMintmark() }}/{{coin.pcgs_num}}" target='blank' rel='noreferrer noopener'> PCGS Page </a>
+</div>
