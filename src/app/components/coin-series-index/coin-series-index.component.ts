@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoinDataService } from '../services/data/coin-data.service';
-import { Coin } from '../models/coin';
+import { CoinDataService } from '../../services/data/coin-data.service';
+import { Coin } from '../../models/coin';
 
 @Component({
   selector: 'app-coin-series-index',

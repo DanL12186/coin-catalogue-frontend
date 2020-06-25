@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { CoinComponent } from './coin/coin.component';
-import { CoinSeriesIndexComponent } from './coin-series-index/coin-series-index.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { CoinComponent } from './components/coin/coin.component';
+import { CoinSeriesIndexComponent } from './components/coin-series-index/coin-series-index.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },

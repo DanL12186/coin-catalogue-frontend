@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CoinDataService } from '../services/data/coin-data.service';
-import { Coin } from '../models/coin';
+import { CoinDataService } from '../../services/data/coin-data.service';
+import { Coin } from '../../models/coin';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
