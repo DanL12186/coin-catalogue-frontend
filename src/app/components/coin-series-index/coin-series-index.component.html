@@ -7,7 +7,7 @@
 
   <div class='container text-center' *ngFor="let coin of coins">
     <div>
-      <a routerLink="/{{ this.url }}/{{ coin.yearAndMintmark() }}">{{ coin.yearAndMintmark() }}</a>
+      <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series }}/{{ coin.yearAndMintmark() }}">{{ coin.yearAndMintmark() }}</a>
       ({{ coin.mintage | number }} minted)
     </div>
   </div>

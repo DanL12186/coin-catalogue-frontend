@@ -12,10 +12,10 @@ export class CoinDataService {
 
   getCoins(params): Observable<Coin[]> {
     const denomination = params.denomination
-    const series = params['series']
-                         .split('-')
-                         .map(str => str.replace(/[a-z]/, char => char.toUpperCase()))
-                         .join(' ');
+    const series = params?.series
+                         ?.split('-')
+                         ?.map(str => str.replace(/[a-z]/, char => char.toUpperCase()))
+                         ?.join(' ') || "";
 
     return this.http.get<Coin[]>(`http://localhost:3002/coins?denomination=${denomination}&series=${series}`)
   }

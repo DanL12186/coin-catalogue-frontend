@@ -15,7 +15,7 @@ export class CoinSeriesIndexComponent implements OnInit {
 
   params       = this.route.snapshot.params;
   denomination = this.params.denomination;
-  seriesName   = this.params.series.split('-').join(' ');
+  seriesName   = this.params.series?.split('-')?.join(' ');
   url          = window.location.pathname;
   
   constructor(private route: ActivatedRoute,
@@ -31,8 +31,8 @@ export class CoinSeriesIndexComponent implements OnInit {
         )
   }
 
-  sortByProperty(property) {
-    this.coins.sort((a, b) => {
+  sortByProperty(property : string) {
+    this.coins.sort((a : Coin, b : Coin) => {
       return a[property] - b[property] || a.yearAndMintmark().localeCompare(b.yearAndMintmark())
     })
 
@@ -44,8 +44,12 @@ export class CoinSeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data: Coin[]) {
-    console.log(data)
-    this.coins = data.map(json => Object.assign(new Coin(null, null, null, null, null, null, null, null, null, null, null), json['attributes']))
+    let coin: Coin;
+
+    this.coins = data.map(json => {
+      coin = new Coin(null, null, null, null, null, null, null, null, null, null, null);
+      return Object.assign(coin, json['attributes'])
+    })
   }
 
   handleError(error) {

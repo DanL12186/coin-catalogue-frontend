@@ -7,7 +7,7 @@ import { CoinSeriesIndexComponent } from './components/coin-series-index/coin-se
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'coins', component: CoinComponent },
-  { path: 'coins/:denomination', component: CoinComponent },
+  { path: 'coins/:denomination', component: CoinSeriesIndexComponent },
   { path: 'coins/:denomination/:series', component: CoinSeriesIndexComponent },
   { path: 'coins/:denomination/:series/:year-and-mintmark', component: CoinComponent }
   // { path: 'welcome', component: WelcomeComponent },
