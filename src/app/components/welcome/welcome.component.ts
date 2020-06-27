@@ -14,13 +14,13 @@ export class WelcomeComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get("http://localhost:3002/").subscribe(response => this.handleResponse(response), error => "ohhhh sheeeeeeeitt");
-    console.log("calling handleResponse()")
-    //this.backendData = this.http.get("http://localhost:3002/")
+    this.http.get("http://localhost:3002/").subscribe(
+      response => this.handleResponse(response), 
+      error    => "error!"
+    );
   }
 
   handleResponse(response) {
-    'dis is da response :D derp'
     console.log(response)
     this.backendData = response;
     this.backendMessage = response.what
