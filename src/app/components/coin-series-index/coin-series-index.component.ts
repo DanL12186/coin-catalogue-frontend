@@ -18,6 +18,8 @@ export class CoinSeriesIndexComponent implements OnInit {
   denomination = this.params.denomination;
   seriesName   = this.params.series?.split('-')?.join(' ');
   category     = Coin.denominationToCategory(this.denomination);
+
+  sortByLabels = { year: 'Sort By Year', mintage: 'Sort By Mintage' };
   
   constructor(private route: ActivatedRoute,
               private coinDataService: CoinDataService,
@@ -41,10 +43,12 @@ export class CoinSeriesIndexComponent implements OnInit {
     })
 
     if (this.sorted) {
-      this.coins.reverse()
+      this.coins.reverse();
     }
 
-    this.sorted = !this.sorted
+    this.sortByLabels[property] = `Sort By ${property} ${this.sorted ? '▼' : '▲'}`;
+
+    this.sorted = !this.sorted;
   }
 
   handleResponse(data: Coin[]) {
