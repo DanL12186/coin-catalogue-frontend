@@ -15,6 +15,7 @@ export class CoinSeriesIndexComponent implements OnInit {
 
   params       = this.route.snapshot.params;
   denomination = this.params.denomination;
+  category     = Coin.denominationToCategory(this.denomination);
   seriesName   = this.params.series?.split('-')?.join(' ');
   url          = window.location.pathname;
   
@@ -47,8 +48,8 @@ export class CoinSeriesIndexComponent implements OnInit {
     let coin: Coin;
 
     this.coins = data.map(json => {
-      coin = new Coin(null, null, null, null, null, null, null, null, null, null, null);
-      return Object.assign(coin, json['attributes'])
+      coin = new Coin;
+      return Object.assign(coin, json)
     })
   }
 

@@ -1,17 +1,18 @@
-//this literally does nothing unless called directly.
 export class Coin {
   constructor(
-    public id: number,
-    public year: number,
-    public mintmark: string,
-    public denomination: string,
-    public category: string,
-    public mintage: number,
-    public generic_img_url: string,
-    public metal_composition: JSON,
-    public pcgs_num: number,
-    public series: string,
-    public diameter: number
+    public id?: number,
+    public year?: number,
+    public mintmark?: string,
+    public denomination?: string,
+    public category?: string,
+    public mintage?: number,
+    public generic_img_url?: string,
+    public metal_composition?: JSON,
+    public pcgs_num?: number,
+    public series?: string,
+    public diameter?: number,
+    public mass?: number,
+    public designer?: string,
   ) {
       this.id = id;
       this.year = year;
@@ -24,6 +25,20 @@ export class Coin {
       this.pcgs_num = pcgs_num
       this.series = series
       this.diameter = diameter
+      this.mass = mass
+      this.designer = designer
+  }
+
+  static denominationToCategory(denomination: string): string {
+    const categories = { 
+      '$1': 'Gold Dollars', 
+      '$2.50': 'Quarter Eagles', 
+      '$5': 'Half Eagles', 
+      '$10': 'Eagles', 
+      '$20': 'Double Eagles' 
+    }
+
+    return categories[denomination];
   }
 
   yearAndMintmark() : string {
