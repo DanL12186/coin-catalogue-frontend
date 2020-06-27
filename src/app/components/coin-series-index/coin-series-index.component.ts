@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoinDataService } from '../../services/data/coin-data.service';
 import { Coin } from '../../models/coin';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-coin-series-index',
@@ -15,15 +16,17 @@ export class CoinSeriesIndexComponent implements OnInit {
 
   params       = this.route.snapshot.params;
   denomination = this.params.denomination;
-  category     = Coin.denominationToCategory(this.denomination);
   seriesName   = this.params.series?.split('-')?.join(' ');
-  url          = window.location.pathname;
+  category     = Coin.denominationToCategory(this.denomination);
   
   constructor(private route: ActivatedRoute,
-              private coinDataService: CoinDataService
+              private coinDataService: CoinDataService,
+              private titleService: Title
              ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(`${this.denomination} ${this.seriesName || this.category}`);
+
     this.coinDataService
         .getCoins(this.params)
         .subscribe(

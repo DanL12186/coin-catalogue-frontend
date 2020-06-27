@@ -3,6 +3,7 @@ import { CoinDataService } from '../../services/data/coin-data.service';
 import { Coin } from '../../models/coin';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-coin',
@@ -13,7 +14,8 @@ export class CoinComponent implements OnInit {
   coin: Coin;
 
   constructor(private coinDataService: CoinDataService, 
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private titleService: Title
              ) { }
 
   ngOnInit(): void {
@@ -31,6 +33,8 @@ export class CoinComponent implements OnInit {
 
   handleResponse = (data : Coin) => {
     Object.assign(this.coin, data)
+
+    this.titleService.setTitle(`${this.coin.yearAndMintmark()} ${this.coin.series}`)
     console.log(this.coin)
   }
 
