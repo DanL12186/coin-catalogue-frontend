@@ -13,6 +13,7 @@ export class Coin {
     public diameter?: number,
     public mass?: number,
     public designer?: string,
+    public pcgs_population?: JSON,
   ) {
       this.id = id;
       this.year = year;
@@ -27,6 +28,7 @@ export class Coin {
       this.diameter = diameter
       this.mass = mass
       this.designer = designer
+      this.pcgs_population = pcgs_population
   }
 
   static denominationToCategory(denomination: string): string {

@@ -21,7 +21,7 @@ export class CoinComponent implements OnInit {
   ngOnInit(): void {
     const params = this.route.snapshot.params;
 
-    this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0);
+    this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{});
 
     this.coinDataService
         .getCoin(params)

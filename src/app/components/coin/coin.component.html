@@ -10,6 +10,9 @@
   <div> Denomination: {{ coin.denomination }} </div>
   <div> Mintage: {{ coin.mintage | number }} </div>
   <div> Composition: {{ coin.metals() | titlecase }} </div>
+  <div> Designer: {{ coin.designer }} </div>
+  <div> Diameter: {{ coin.diameter }} mm ({{ coin.diameter / 25.4 | number: '1.1-2' }} inches) </div> 
+  <div> PCGS Population: {{ coin.pcgs_population['total'] }} </div>
   
   <a href="https://www.pcgs.com/coinfacts/coin/{{ coin.yearAndMintmark() }}/{{coin.pcgs_num}}" target='blank' rel='noreferrer noopener'> PCGS Page </a>
 </div>
