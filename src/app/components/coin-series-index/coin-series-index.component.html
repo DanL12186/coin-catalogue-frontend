@@ -1,12 +1,12 @@
 <div class='text-center container-fluid'>
   
   <h1> 
-    <div> {{ denomination }} {{ category }} </div>
+    <a routerLink="/coins/{{denomination}}"> {{ denomination }} {{ category }} </a>
     <div> {{ seriesName | titlecase }} </div>
   </h1>
 
-  <button class='btn btn-sm' (click)="sortByProperty('year')"> {{ this.sortByLabels['year'] | titlecase }} </button>
-  <button class='btn btn-sm' (click)="sortByProperty('mintage')"> {{ this.sortByLabels['mintage'] | titlecase }} </button>
+  <button class='btn btn-sm sort-btn' (click)="sortByProperty('year')"> {{ this.sortByLabels['year'] | titlecase }} </button>
+  <button class='btn btn-sm sort-btn' (click)="sortByProperty('mintage')"> {{ this.sortByLabels['mintage'] | titlecase }} </button>
 
   <div class='container text-center' *ngFor="let coin of coins">
     <div>

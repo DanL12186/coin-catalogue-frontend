@@ -4,6 +4,8 @@ import { Coin } from '../../models/coin';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { FormatChartDataService } from 'src/app/services/charts/format-chart-data.service';
+import { RenderChartService } from 'src/app/services/charts/render-chart.service';
 
 @Component({
   selector: 'app-coin',
@@ -15,7 +17,9 @@ export class CoinComponent implements OnInit {
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
-              private titleService: Title
+              private titleService: Title,
+              private chartDataFormatter: FormatChartDataService,
+              private chartRenderService: RenderChartService,
              ) { }
 
   ngOnInit(): void {
@@ -35,11 +39,25 @@ export class CoinComponent implements OnInit {
     Object.assign(this.coin, data)
 
     this.titleService.setTitle(`${this.coin.yearAndMintmark()} ${this.coin.series}`)
-    console.log(this.coin)
+
+    this.displayChart(this.formatChartData())
   }
 
   handleError = (data: HttpErrorResponse) => {
     console.log('bohnoes D:', data);
+  }
+
+  formatChartData = () => {
+    return this.chartDataFormatter.columnFormat(this.coin.pcgs_population);
+  }
+
+  displayChart = (pcgsPopulationData, chartType = 'column') => {
+    return this.chartRenderService.renderChart(pcgsPopulationData, chartType)
+  }
+
+  changeChartType = (chartType: string) => {
+    this.chartRenderService.chart.options.data[0].type = chartType;
+    this.displayChart(this.formatChartData(), chartType);
   }
 
 }

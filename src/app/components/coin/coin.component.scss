@@ -1,5 +1,16 @@
 .thumb {
-  margin-left: 10px;
-  border-radius: 50%;
-  width: 4%;
+    margin-left: 10px;
+    border-radius: 50%;
+    width: 4%;
+}
+
+.chart-div {
+    margin: auto;
+    width: 75%;
+    padding: 100px;
+
+    .chart {
+        margin-top: 50px;
+        height: 400px;
+    }
 }
