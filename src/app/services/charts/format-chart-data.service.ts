@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class FormatChartDataService {
   constructor() { }
 
@@ -14,17 +15,25 @@ export class FormatChartDataService {
         const value = data[key] || 0
 
         const dataPoint = { label: key, y: value }
-        
+
         formattedData.push(dataPoint)
       }
     }
 
-    //remove last X number of grades without a value
-    while (!formattedData[formattedData.length - 1].y) {
-      formattedData.pop()
-    }
-    
+    this.trimEmptyEnds(formattedData)
+
     return formattedData;
   };
+
+  //remove empty values on either end of the array
+  private trimEmptyEnds(data: JSON[]): void {
+    while (!data[data.length - 1]['y']) {
+      data.pop()
+    }
+
+    while (!data[0]['y']) {
+      data.shift()
+    }
+  }
 
 }
