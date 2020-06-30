@@ -5,12 +5,11 @@ import * as CanvasJS from '../../assets/canvasjs.min.js';
   providedIn: 'root'
 })
 export class RenderChartService {
-
+  chart: CanvasJS;
+  
   constructor() { }
 
-  chart: CanvasJS;
-
-  renderChart(chartData, chartType) {
+  renderChart(chartData : JSON, chartType : string) {
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title: {

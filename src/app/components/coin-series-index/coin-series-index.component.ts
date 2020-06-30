@@ -19,7 +19,7 @@ export class CoinSeriesIndexComponent implements OnInit {
   seriesName   = this.params.series?.split('-')?.join(' ');
   category     = Coin.denominationToCategory(this.denomination);
 
-  sortByLabels = { year: 'Sort By Year', mintage: 'Sort By Mintage' };
+  sortByLabels = { year: 'Sort By Year', mintage: 'Sort By Mintage', pcgs_total: 'Sort By PCGS Total' };
   
   constructor(private route: ActivatedRoute,
               private coinDataService: CoinDataService,
@@ -37,7 +37,7 @@ export class CoinSeriesIndexComponent implements OnInit {
         )
   }
 
-  sortByProperty(property : string) {
+  sortCoinsByProperty(property : string) {
     this.coins.sort((a : Coin, b : Coin) => {
       return a[property] - b[property] || a.yearAndMintmark().localeCompare(b.yearAndMintmark())
     })
@@ -52,12 +52,9 @@ export class CoinSeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data: Coin[]) {
-    let coin: Coin;
-
-    this.coins = data.map(json => {
-      coin = new Coin;
-      return Object.assign(coin, json)
-    })
+    this.coins = data.map(json => Object.assign(new Coin(), json))
+    // console.log(this.coins)
+    this.sortCoinsByProperty('year');
   }
 
   handleError(error) {
