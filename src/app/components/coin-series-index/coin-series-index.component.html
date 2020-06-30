@@ -1,18 +1,38 @@
 <div class='text-center container-fluid'>
   
   <h1> 
-    <a routerLink="/coins/{{denomination}}"> {{ denomination }} {{ category }} </a>
+    <a routerLink="/coins/{{denomination}}"> {{ category }} ({{ denomination }}) </a>
     <div> {{ seriesName | titlecase }} </div>
   </h1>
 
-  <button class='btn btn-sm sort-btn' (click)="sortByProperty('year')"> {{ this.sortByLabels['year'] | titlecase }} </button>
-  <button class='btn btn-sm sort-btn' (click)="sortByProperty('mintage')"> {{ this.sortByLabels['mintage'] | titlecase }} </button>
+  <div>
+    <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('year')"> 
+      {{ this.sortByLabels['year'] | titlecase }} 
+    </button>
+    
+    <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('mintage')">
+      {{ this.sortByLabels['mintage'] | titlecase }} 
+    </button>
+
+    <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('pcgs_total')">
+      {{ this.sortByLabels['pcgs_total'] | titlecase }}
+    </button>
+  </div>
 
   <div class='container text-center' *ngFor="let coin of coins">
-    <div>
-      <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.yearAndMintmark() }}">{{ coin.yearAndMintmark() }}</a>
-      ({{ coin.mintage | number }} minted)
-    </div>
+      
+    <span> 
+      <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.yearAndMintmark() }}">{{ coin.yearAndMintmark() }} </a> 
+    </span>
+
+    <span class='coin-idx-info'> 
+      ({{ coin.mintage | number }} minted) 
+    </span>
+
+    <span class='coin-idx-info'> 
+      PCGS Population: {{ coin.pcgs_total }} 
+    </span>
+
   </div>
 
 </div>
