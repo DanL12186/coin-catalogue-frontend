@@ -14,6 +14,7 @@ export class Coin {
     public mass?: number,
     public designer?: string,
     public pcgs_population?: JSON,
+    public pcgs_total?: number
   ) {
       this.id = id;
       this.year = year;
@@ -29,11 +30,19 @@ export class Coin {
       this.mass = mass
       this.designer = designer
       this.pcgs_population = pcgs_population
+      this.pcgs_total = pcgs_total
   }
 
   static denominationToCategory(denomination: string): string {
     const categories = { 
-      '$1': 'Gold Dollars', 
+      '1C': 'Pennies',
+      '5C': 'Nickels',
+      '10C': 'Dimes',
+      '25C': 'Quarters',
+      '50C': 'Half Dollars',
+      '$1': 'Silver Dollars',
+      
+      '$1G': 'Gold Dollars', 
       '$2.50': 'Quarter Eagles', 
       '$5': 'Half Eagles', 
       '$10': 'Eagles', 
