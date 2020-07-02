@@ -1,5 +1,4 @@
 <h1 class='text-center'> 
-      
   <div> 
     <a routerLink="/coins/{{coin.denomination}}/{{ coin.series | slugify }}">{{coin.series}}</a> <img src={{coin.generic_img_url}} class='thumb'>
   </div>
@@ -12,7 +11,9 @@
   <div> Composition: {{ coin.metals() | titlecase }} </div>
   <div> Designer: {{ coin.designer }} </div>
   <div> Diameter: {{ coin.diameter }} mm ({{ coin.diameter / 25.4 | number: '1.1-2' }} inches) </div> 
+  <div> Mass: {{ coin.mass }} grams ({{ ounces | number: '1.1-3' }} ounces) </div>
   <div> PCGS Population: {{ coin.pcgs_population['total'] | number }} </div>
+  <div> Melt Value: ${{ meltValue }} </div>
   
   <a href="https://www.pcgs.com/coinfacts/coin/{{ coin.yearAndMintmark() }}/{{coin.pcgs_num}}" target='blank' rel='noreferrer noopener'> PCGS Page </a>
 </div>

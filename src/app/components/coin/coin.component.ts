@@ -14,6 +14,8 @@ import { RenderChartService } from 'src/app/services/charts/render-chart.service
 })
 export class CoinComponent implements OnInit {
   coin: Coin;
+  ounces: number;
+  meltValue: number;
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
@@ -40,6 +42,9 @@ export class CoinComponent implements OnInit {
 
     this.titleService.setTitle(`${this.coin.yearAndMintmark()} ${this.coin.series}`)
 
+    this.meltValue = this.coin.meltValue()
+    this.ounces = this.coin.weightInOunces()
+    
     this.displayChart(this.formatChartData())
   }
 

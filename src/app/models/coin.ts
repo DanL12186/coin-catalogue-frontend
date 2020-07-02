@@ -52,6 +52,34 @@ export class Coin {
     return categories[denomination];
   }
 
+  metal(): string {
+    if (this.metal_composition['gold']) return 'gold';
+    if (this.metal_composition['silver']) return 'silver';
+
+    return 'other';
+  }
+
+  weightInOunces(): number {
+    return Math.round(this.mass / 31.1035 * 100000) / 100000;
+  }
+
+  meltValue(): number {
+    //later store / retrieve this programmatically
+    const pricePerOunce = {
+      'silver': 17.25,
+      'gold': 1707.97
+    }
+
+    if (this.metal() === 'other') {
+      return 0;
+    }
+
+    const purity = this.metal_composition[this.metal()] / 100.0
+    const value = this.weightInOunces() * purity * pricePerOunce[this.metal()]
+
+    return Math.round(value * 100) / 100;
+  }
+
   yearAndMintmark() : string {
     return this.mintmark ? `${this.year}-${this.mintmark}` : `${this.year}`
   }
