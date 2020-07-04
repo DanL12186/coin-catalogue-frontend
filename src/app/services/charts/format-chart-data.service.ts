@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class FormatChartDataService {
   constructor() { }
 
-  columnFormat(data) {
+  format(data) {
     const formattedData = []
 
     for (const key in data) {
