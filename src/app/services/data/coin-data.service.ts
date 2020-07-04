@@ -11,11 +11,7 @@ export class CoinDataService {
   constructor(private http: HttpClient) { }
 
   getCoins(params): Observable<Coin[]> {
-    const denomination = params.denomination
-    const series = params?.series
-                         ?.split('-')
-                         ?.map(str => str.replace(/[a-z]/, char => char.toUpperCase()))
-                         ?.join(' ') || "";
+    const [denomination, series] = this.formatGetCoinsParams(params);
 
     return this.http.get<Coin[]>(`http://localhost:3002/coins?denomination=${denomination}&series=${series}`)
   }
@@ -25,10 +21,23 @@ export class CoinDataService {
  
     const [year, mintmark, designation] = this.formatGetCoinParams(yearMintmarkAndDesignation);
 
-    //SHOULD PROBBALY BE .get<Observable<JSON>>
     return this.http.get<JSON>(
       `http://localhost:3002/coin?denomination=${denomination}&year=${year}&mintmark=${mintmark}&special_designation=${designation}`
     )
+  }
+
+  private formatGetCoinsParams(params) {
+    const denomination = params.denomination
+    let   series = '';
+
+    if (params.series) {
+      series = params.series
+                     .split('-')
+                     .map(str => str.replace(/[a-z]/, charMatch => charMatch.toUpperCase()))
+                     .join(' ') || "";
+    }
+
+    return [denomination, series];
   }
 
   private formatGetCoinParams(yearMintmarkAndDesignation): string[] {
