@@ -12,22 +12,24 @@ import { RenderChartService } from 'src/app/services/charts/render-chart.service
   templateUrl: './coin.component.html',
   styleUrls: ['./coin.component.scss']
 })
+
 export class CoinComponent implements OnInit {
   coin: Coin;
   ounces: number;
   meltValue: number;
+  coinDescription = '';
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
               private titleService: Title,
-              private chartDataFormatter: FormatChartDataService,
+              private chartDataFormatService: FormatChartDataService,
               private chartRenderService: RenderChartService,
              ) { }
 
   ngOnInit(): void {
     const params = this.route.snapshot.params;
 
-    this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{});
+    this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{}, 0, '');
 
     this.coinDataService
         .getCoin(params)
@@ -37,13 +39,12 @@ export class CoinComponent implements OnInit {
         )
   }
 
-  handleResponse = (data : Coin) => {
+  handleResponse = (data : JSON) => {
     Object.assign(this.coin, data)
 
-    this.titleService.setTitle(`${this.coin.yearAndMintmark()} ${this.coin.series}`)
+    this.titleService.setTitle(`${this.coin.description()} ${this.coin.series}`)
 
-    this.meltValue = this.coin.meltValue()
-    this.ounces = this.coin.weightInOunces()
+    this.setComponentProperties();
     
     this.displayChart(this.formatChartData())
   }
@@ -52,8 +53,14 @@ export class CoinComponent implements OnInit {
     console.log('bohnoes D:', data);
   }
 
+  setComponentProperties() {
+    this.meltValue = this.coin.meltValue()
+    this.ounces = this.coin.weightInOunces()
+    this.coinDescription = this.coin.description()
+  }
+
   formatChartData = () => {
-    return this.chartDataFormatter.columnFormat(this.coin.pcgs_population);
+    return this.chartDataFormatService.format(this.coin.pcgs_population);
   }
 
   displayChart = (pcgsPopulationData, chartType = 'column') => {
