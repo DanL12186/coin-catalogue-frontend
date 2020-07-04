@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'silver', component: SilverComponent },
   { path: 'coins/:denomination', component: CoinSeriesIndexComponent },
   { path: 'coins/:denomination/:series', component: CoinSeriesIndexComponent },
-  { path: 'coins/:denomination/:series/:year-and-mintmark', component: CoinComponent }
+  { path: 'coins/:denomination/:series/:year-mintmark-and-designation', component: CoinComponent }
   // { path: 'welcome', component: WelcomeComponent },
   
 ];

@@ -21,8 +21,24 @@ export class CoinDataService {
   }
 
   getCoin = params => {
-    const [ denomination, yearAndMintmark ] = [ params['denomination'], params['year-and-mintmark'] ]
+    const [ denomination, yearMintmarkAndDesignation ] = [ params['denomination'], params['year-mintmark-and-designation'] ]
  
-    return this.http.get<Coin>(`http://localhost:3002/coin?denomination=${denomination}&year_and_mintmark=${yearAndMintmark}`)
+    const [year, mintmark, designation] = this.formatGetCoinParams(yearMintmarkAndDesignation);
+
+    //SHOULD PROBBALY BE .get<Observable<JSON>>
+    return this.http.get<JSON>(
+      `http://localhost:3002/coin?denomination=${denomination}&year=${year}&mintmark=${mintmark}&special_designation=${designation}`
+    )
+  }
+
+  private formatGetCoinParams(yearMintmarkAndDesignation): string[] {
+    const year        = yearMintmarkAndDesignation.slice(0, 4);
+    const mintmark    = (yearMintmarkAndDesignation.match(/(?<=\d{4}-)(CC|[C-S])/gi) || "").toString()
+    const designation = yearMintmarkAndDesignation.replace(year, '')
+                                                  .replace(/^-/,'')
+                                                  .replace(mintmark, '')
+                                                  .trim();
+
+    return [year, mintmark, designation]
   }
 }
