@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoinComponent } from './components/coin/coin.component';
 import { Slugify } from './pipes/slugify.pipe';
 import { CoinSeriesIndexComponent } from './components/coin-series-index/coin-series-index.component';
-import { GoldComponent } from './gold/gold.component';
-import { SilverComponent } from './silver/silver.component';
+import { GoldComponent } from '././components/gold/gold.component';
+import { SilverComponent } from '././components/silver/silver.component'
 
 
 @NgModule({
