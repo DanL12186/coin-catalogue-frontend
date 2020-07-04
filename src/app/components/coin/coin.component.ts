@@ -7,6 +7,8 @@ import { Title } from '@angular/platform-browser';
 import { FormatChartDataService } from 'src/app/services/charts/format-chart-data.service';
 import { RenderChartService } from 'src/app/services/charts/render-chart.service';
 
+import Panzoom from '@panzoom/panzoom';
+
 @Component({
   selector: 'app-coin',
   templateUrl: './coin.component.html',
@@ -18,6 +20,8 @@ export class CoinComponent implements OnInit {
   ounces: number;
   meltValue: number;
   coinDescription = '';
+  panzoom; 
+  elem: HTMLElement;
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
@@ -47,6 +51,8 @@ export class CoinComponent implements OnInit {
     this.setComponentProperties();
     
     this.displayChart(this.formatChartData())
+
+    this.enableZoom()
   }
 
   handleError = (data: HttpErrorResponse) => {
@@ -70,6 +76,18 @@ export class CoinComponent implements OnInit {
   changeChartType = (chartType: string) => {
     this.chartRenderService.chart.options.data[0].type = chartType;
     this.displayChart(this.formatChartData(), chartType);
+  }
+
+  enableZoom() {
+    this.elem = document.getElementById('panzoom-image')
+
+    this.panzoom = Panzoom(this.elem, { maxScale: 5, canvas: true })
+
+    this.elem.parentElement.addEventListener('wheel', (zoom) => {
+      const deltaY = zoom.deltaY;
+
+      deltaY > 0 ? this.panzoom.zoomOut(0.01 * deltaY) : this.panzoom.zoomIn(0.01 * deltaY)
+    });
   }
 
 }
