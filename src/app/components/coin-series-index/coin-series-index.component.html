@@ -30,9 +30,7 @@
 
     <tr *ngFor="let coin of coins" class='coin-idx-info'>
       <td>
-      <a
-        routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.yearAndMintmark() }} {{ coin.special_designation }}">{{ (coin.yearAndMintmark() + ' ' + coin.special_designation).trim() }}
-      </a>
+      <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.description() }}">{{ coin.description() }} </a>
       </td>
       <td>({{ coin.mintage | number }} minted)</td>
       <td>PCGS Population: {{ coin.pcgs_total }}</td>

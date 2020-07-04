@@ -39,7 +39,7 @@ export class CoinSeriesIndexComponent implements OnInit {
 
   sortCoinsByProperty(property : string) {
     this.coins.sort((a : Coin, b : Coin) => {
-      return a[property] - b[property] || a.yearAndMintmark().localeCompare(b.yearAndMintmark())
+      return a[property] - b[property] || a.description().localeCompare(b.description())
     })
 
     if (this.sorted) {

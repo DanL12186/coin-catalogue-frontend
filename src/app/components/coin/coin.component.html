@@ -6,7 +6,7 @@
     </span>
   </div>
 
-  <div> {{ coin.yearAndMintmark() }} {{ coin.special_designation }} {{ coin.denomination }} </div>
+  <div> {{ coinDescription }} {{ coin.denomination }} </div>
 </h1>
 
 <div class='container text-center'>
@@ -19,7 +19,11 @@
   <div> PCGS Population: {{ coin.pcgs_total | number }} </div>
   <div> Melt Value: ${{ meltValue }} </div>
   
-  <a href="https://www.pcgs.com/coinfacts/coin/{{ coin.yearAndMintmark() }}/{{coin.pcgs_num}}" target='blank' rel='noreferrer noopener'> PCGS Page </a>
+  <a href="https://www.pcgs.com/coinfacts/coin/{{ coinDescription | slugify }}/{{coin.pcgs_num}}" 
+     target='blank' 
+     rel='noreferrer noopener'> 
+     PCGS Page 
+  </a>
 </div>
 
 <div class='chart-div text-center'>
