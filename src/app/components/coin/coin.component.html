@@ -1,8 +1,12 @@
 <h1 class='text-center'> 
   <div> 
-    <a routerLink="/coins/{{coin.denomination}}/{{ coin.series | slugify }}">{{coin.series}}</a> <img src="{{coin.generic_img_url}}" class='thumb'>
+    <a routerLink="/coins/{{coin.denomination}}/{{ coin.series | slugify }}">{{coin.series}}</a> 
+    <span>
+      <img src="{{coin.generic_img_url}}" class='thumb' id='panzoom-image'>
+    </span>
   </div>
-  <div> {{ coin.yearAndMintmark() }} {{ coin.denomination }} </div>
+
+  <div> {{ coin.yearAndMintmark() }} {{ coin.special_designation }} {{ coin.denomination }} </div>
 </h1>
 
 <div class='container text-center'>

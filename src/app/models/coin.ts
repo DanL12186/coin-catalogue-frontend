@@ -14,7 +14,8 @@ export class Coin {
     public mass?: number,
     public designer?: string,
     public pcgs_population?: JSON,
-    public pcgs_total?: number
+    public pcgs_total?: number,
+    public special_designation?: string
   ) {
       this.id = id;
       this.year = year;
@@ -31,6 +32,7 @@ export class Coin {
       this.designer = designer
       this.pcgs_population = pcgs_population
       this.pcgs_total = pcgs_total
+      this.special_designation = special_designation
   }
 
   static denominationToCategory(denomination: string): string {
@@ -66,8 +68,8 @@ export class Coin {
   meltValue(): number {
     //later store / retrieve this programmatically
     const pricePerOunce = {
-      'silver': 17.25,
-      'gold': 1707.97
+      'silver': 18.45,
+      'gold': 1787.97
     }
 
     if (this.metal() === 'other') {
