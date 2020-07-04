@@ -55,8 +55,12 @@ export class Coin {
   }
 
   metal(): string {
-    if (this.metal_composition['gold']) return 'gold';
-    if (this.metal_composition['silver']) return 'silver';
+    if (this.metal_composition['gold']) {
+      return 'gold';
+    }
+    if (this.metal_composition['silver']) {
+      return 'silver';
+    }
 
     return 'other';
   }
@@ -82,8 +86,12 @@ export class Coin {
     return Math.round(value * 100) / 100;
   }
 
-  yearAndMintmark() : string {
-    return this.mintmark ? `${this.year}-${this.mintmark}` : `${this.year}`
+  description() : string {
+    if (this.mintmark) { 
+      return `${this.year}-${this.mintmark} ${this.special_designation}`.trim();
+    } else {
+      return `${this.year} ${this.special_designation}`.trim();
+    }
   }
 
   metals() : string {
