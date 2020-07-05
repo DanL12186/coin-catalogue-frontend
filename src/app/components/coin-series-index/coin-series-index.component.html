@@ -26,19 +26,19 @@
 
   <table class='container coins-table'>
     <tr>
-      <th>
+      <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('year')">
           {{ this.sortByLabels['year'] | titlecase }}
         </button>
       </th>
 
-      <th>
+      <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('mintage')">
           {{ this.sortByLabels['mintage'] | titlecase }}
         </button>
       </th>
 
-      <th>
+      <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('pcgs_total')">
           {{ this.sortByLabels['pcgs_total'] | titlecase }}
         </button>
@@ -47,10 +47,13 @@
 
     <tr *ngFor="let coin of filteredCoins" class='coin-idx-info'>
       <td>
-      <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.description() }}">{{ coin.description() }} </a>
+        <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.description() }}">
+          {{ coin.description() }} 
+        </a>
       </td>
-      <td>({{ coin.mintage | number }} minted)</td>
-      <td>PCGS Population: {{ coin.pcgs_total }}</td>
+
+      <td> ({{ coin.mintage | number }} minted) </td>
+      <td> PCGS Population: {{ coin.pcgs_total }} </td>
     </tr>
 
   </table>
