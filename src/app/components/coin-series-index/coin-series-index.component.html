@@ -1,4 +1,20 @@
 <div class='text-center container-fluid'>
+  
+  <h1>
+    <a routerLink="/coins/{{denomination}}"> {{ category }} ({{ denomination }}) </a>
+    <div> {{ seriesName | titlecase }} </div>
+  </h1>
+
+  <div>
+    <label for='filter-by-mintmark'>Filter By Mintmark</label>
+    <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter"
+      (ngModelChange)="filterDisplayedCoinsByMintmark(mintmarkFilter)">
+      <option *ngFor="let option of mintmarks" [value]="option">
+        {{ option }}
+      </option>
+      <option value=''>No Mintmark (P)</option>
+    </select>
+  </div>
 
   <div class='filter-selections'>
     <label for='varieties'>Hide or Show Varieties</label>
@@ -8,22 +24,7 @@
     </select>
   </div>
 
-  <div>
-    <label for='filter-by-mintmark'>Filter By Mintmark</label>
-    <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter" (ngModelChange)="filterDisplayedCoinsByMintmark(mintmarkFilter)">
-      <option *ngFor="let option of mintmarks" [value]="option">
-        {{ option }}
-      </option>
-      <option value=''>No Mintmark (P)</option>
-    </select>
-  </div>
-  
-  <h1>
-    <a routerLink="/coins/{{denomination}}"> {{ category }} ({{ denomination }}) </a>
-    <div> {{ seriesName | titlecase }} </div>
-  </h1>
-
-  <table class='container'>
+  <table class='container coins-table'>
     <tr>
       <th>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('year')">
