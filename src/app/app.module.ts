@@ -11,6 +11,7 @@ import { Slugify } from './pipes/slugify.pipe';
 import { CoinSeriesIndexComponent } from './components/coin-series-index/coin-series-index.component';
 import { GoldComponent } from '././components/gold/gold.component';
 import { SilverComponent } from '././components/silver/silver.component'
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SilverComponent } from '././components/silver/silver.component'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [
     Title

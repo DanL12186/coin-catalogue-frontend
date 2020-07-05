@@ -1,11 +1,27 @@
 <div class='text-center container-fluid'>
 
+  <div class='filter-selections'>
+    <label for='varieties'>Hide or Show Varieties</label>
+    <select name='varieties' [(ngModel)]="varietiesHidden" (ngModelChange)="hideVarieties(varietiesHidden)">
+      <option value=false>Show</option>
+      <option value=true>Hide</option>
+    </select>
+  </div>
+
+  <div>
+    <label for='filter-by-mintmark'>Filter By Mintmark</label>
+    <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter" (ngModelChange)="filterDisplayedCoinsByMintmark(mintmarkFilter)">
+      <option *ngFor="let option of mintmarks" [value]="option">
+        {{ option }}
+      </option>
+      <option value=''>No Mintmark (P)</option>
+    </select>
+  </div>
+  
   <h1>
     <a routerLink="/coins/{{denomination}}"> {{ category }} ({{ denomination }}) </a>
     <div> {{ seriesName | titlecase }} </div>
   </h1>
-
-
 
   <table class='container'>
     <tr>
@@ -28,7 +44,7 @@
       </th>
     </tr>
 
-    <tr *ngFor="let coin of coins" class='coin-idx-info'>
+    <tr *ngFor="let coin of filteredCoins" class='coin-idx-info'>
       <td>
       <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.description() }}">{{ coin.description() }} </a>
       </td>

@@ -11,8 +11,12 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class CoinSeriesIndexComponent implements OnInit {
-  coins        : Coin[];
-  sorted       : boolean;
+  coins          : Coin[];
+  isSorted       : boolean;
+  varietiesHidden: boolean;
+  mintmarkFilter : string;
+  filteredCoins  : Coin[];
+  mintmarks      : Set<string> = new Set("All");
 
   params       = this.route.snapshot.params;
   denomination = this.params.denomination;
@@ -42,23 +46,50 @@ export class CoinSeriesIndexComponent implements OnInit {
       return a[property] - b[property] || a.description().localeCompare(b.description())
     })
 
-    if (this.sorted) {
+    if (this.isSorted) {
       this.coins.reverse();
     }
 
-    this.sortByLabels[property] = `Sort By ${property} ${this.sorted ? '▼' : '▲'}`;
+    this.sortByLabels[property] = `Sort By ${property} ${this.isSorted ? '▼' : '▲'}`;
 
-    this.sorted = !this.sorted;
+    this.isSorted = !this.isSorted;
   }
 
   handleResponse(data: Coin[]) {
     this.coins = data.map(json => Object.assign(new Coin(), json))
-    // console.log(this.coins)
+    this.filteredCoins = this.coins;
+    this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
     this.sortCoinsByProperty('year');
   }
 
   handleError(error) {
     console.log(error)
+  }
+
+  filterDisplayedCoinsByMintmark(mark : string) {
+    this.mintmarkFilter = mark;
+
+    if (mark === 'All') {
+      return this.filteredCoins = this.varietiesHidden ? this.coins.filter(coin => !coin.special_designation) : this.coins;
+    } else if (mark === '') {
+      mark = null;
+    }
+
+    this.filteredCoins = this.coins.filter(coin => coin.mintmark === mark);
+
+    if (this.varietiesHidden) {
+      this.hideVarieties('true');
+    }
+  }
+
+  hideVarieties(filter) {
+    this.varietiesHidden = filter === 'true';
+    
+    if (this.varietiesHidden) {
+      this.filteredCoins = this.filteredCoins.filter(coin => !coin.special_designation)
+    } else {
+      this.filterDisplayedCoinsByMintmark(this.mintmarkFilter || 'All')
+    }
   }
 
 }
