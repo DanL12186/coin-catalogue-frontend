@@ -8,6 +8,7 @@ import { FormatChartDataService } from 'src/app/services/charts/format-chart-dat
 import { RenderChartService } from 'src/app/services/charts/render-chart.service';
 
 import Panzoom from '@panzoom/panzoom';
+import { GoldAndSilverPricesService } from 'src/app/services/data/gold-and-silver-prices.service';
 
 @Component({
   selector: 'app-coin',
@@ -21,6 +22,7 @@ export class CoinComponent implements OnInit {
   meltValue: number;
   coinDescription = '';
   panzoom; 
+  prices;
   elem: HTMLElement;
 
   constructor(private coinDataService: CoinDataService, 
@@ -28,39 +30,51 @@ export class CoinComponent implements OnInit {
               private titleService: Title,
               private chartDataFormatService: FormatChartDataService,
               private chartRenderService: RenderChartService,
+              private priceService: GoldAndSilverPricesService
              ) { }
 
   ngOnInit(): void {
     const params = this.route.snapshot.params;
 
+    this.prices = this.priceService.fromLocalStorage();
+
     this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{}, 0, '');
+
+    if (!this.prices) {
+      this.priceService
+        .getGoldSilverPrices()
+        .subscribe(data => this.handlePriceResponse(data));
+    }
 
     this.coinDataService
         .getCoin(params)
         .subscribe(
-          data => this.handleResponse(data),
+          data => this.handleCoinResponse(data),
           failure => this.handleError(failure)
         )
   }
 
-  handleResponse = (data : JSON) => {
+  handleCoinResponse = (data : JSON) => {
     Object.assign(this.coin, data)
 
     this.titleService.setTitle(`${this.coin.description()} ${this.coin.series}`)
 
     this.setComponentProperties();
-    
     this.displayChart(this.formatChartData())
-
     this.enableZoom()
   }
 
-  handleError = (data: HttpErrorResponse) => {
+  handlePriceResponse(data : JSON) {
+    this.prices = data
+    localStorage.setItem('goldAndSilverPrices', JSON.stringify(data))
+  }
+
+  handleError = (data : HttpErrorResponse) => {
     console.log('bohnoes D:', data);
   }
 
   setComponentProperties() {
-    this.meltValue = this.coin.meltValue()
+    this.meltValue = this.coin.meltValue(this.prices)
     this.ounces = this.coin.weightInOunces()
     this.coinDescription = this.coin.description()
   }

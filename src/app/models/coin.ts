@@ -69,18 +69,12 @@ export class Coin {
     return Math.round(this.mass / 31.1035 * 100000) / 100000;
   }
 
-  meltValue(): number {
-    //later store / retrieve this programmatically
-    const pricePerOunce = {
-      'silver': 18.45,
-      'gold': 1787.97
-    }
-
-    if (this.metal() === 'other') {
+  meltValue(pricePerOunce : JSON): number {
+    if (!this.metal_composition || this.metal() === 'other') {
       return 0;
     }
 
-    const purity = this.metal_composition[this.metal()] / 100.0
+    const purity = this.metal_composition[this.metal()] / 100
     const value = this.weightInOunces() * purity * pricePerOunce[this.metal()]
 
     return Math.round(value * 100) / 100;
