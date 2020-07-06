@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CoinDataService {
-
+  
   constructor(private http: HttpClient) { }
-
+  
   getCoins(params): Observable<Coin[]> {
     const [denomination, series] = this.formatGetCoinsParams(params);
 
@@ -18,8 +19,7 @@ export class CoinDataService {
 
   getCoin = params => {
     const [ denomination, yearMintmarkAndDesignation ] = [ params['denomination'], params['year-mintmark-and-designation'] ]
- 
-    const [year, mintmark, designation] = this.formatGetCoinParams(yearMintmarkAndDesignation);
+    const [ year, mintmark, designation ] = this.formatGetCoinParams(yearMintmarkAndDesignation);
 
     return this.http.get<JSON>(
       `http://localhost:3002/coin?denomination=${denomination}&year=${year}&mintmark=${mintmark}&special_designation=${designation}`
