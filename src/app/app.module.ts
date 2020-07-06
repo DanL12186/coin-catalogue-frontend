@@ -12,6 +12,7 @@ import { CoinSeriesIndexComponent } from './components/coin-series-index/coin-se
 import { GoldComponent } from '././components/gold/gold.component';
 import { SilverComponent } from '././components/silver/silver.component'
 import { FormsModule } from '@angular/forms';
+import { SeriesIndexComponent } from './components/series-index/series-index.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     CoinSeriesIndexComponent,
     GoldComponent,
     SilverComponent,
+    SeriesIndexComponent,
   ],
   imports: [
     BrowserModule,
