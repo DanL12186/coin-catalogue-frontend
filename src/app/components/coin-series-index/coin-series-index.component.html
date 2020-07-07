@@ -53,7 +53,7 @@
       </td>
 
       <td> ({{ coin.mintage | number }} minted) </td>
-      <td> PCGS Population: {{ coin.pcgs_total }} </td>
+      <td> PCGS Population: {{ coin.pcgs_total || 0 }} </td>
     </tr>
 
   </table>
