@@ -11,7 +11,7 @@ import { Coin } from '../../models/coin';
 
 export class SeriesIndexComponent implements OnInit {
   params = this.route.snapshot.params;
-  series: Object[];
+  seriesList: Object[];
   category = "";
 
   constructor(
@@ -20,7 +20,7 @@ export class SeriesIndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.series = [ 
+    this.seriesList = [ 
       { name: '', denomination: '', generic_img_url: '' } 
     ]
 
@@ -33,7 +33,7 @@ export class SeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data) {
-    this.series = data;
+    this.seriesList = data.sort((a,b) => a['date_range'].slice(0,4) - b['date_range'].slice(0,4));
     this.category = Coin.denominationToCategory(this.params['denomination']);
   }
 

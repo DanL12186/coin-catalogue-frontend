@@ -1,12 +1,14 @@
 <div class='container-fluid text-center'>
-  <h1> {{ category }} </h1>
+  <h1 class='category-title'> {{ category }} </h1>
 
-  <div *ngFor= "let series of series">
-    <h2> {{ series['name'] }} </h2>
+  <div class='row series-index-div'>
+    <div class='series col-sm-4' *ngFor= "let series of seriesList">
+      <h2> {{ series['name'] }} </h2>
+      <h2> {{ series['date_range'] }} </h2>
 
-    <a routerLink="/coins/{{series['denomination']}}/{{series['name'] | slugify }}">
-      <img class="coin-img" src="{{ series['generic_img_url'] }}" width=198px>
-    </a>
+      <a routerLink="/coins/{{series['denomination']}}/{{series['name'] | slugify }}">
+        <img class="coin-img" src="{{ series['generic_img_url'] }}">
+      </a>
+    </div>
   </div>
-
 </div>
