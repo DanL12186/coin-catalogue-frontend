@@ -12,7 +12,8 @@ import { Coin } from '../../models/coin';
 export class SeriesIndexComponent implements OnInit {
   params = this.route.snapshot.params;
   seriesList: Object[];
-  category = "";
+  category: string;
+  metalType: string;
 
   constructor(
     private seriesDataService: SeriesDataService,
@@ -33,8 +34,15 @@ export class SeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data) {
+    const denomination = this.params['denomination']
+
     this.seriesList = data.sort((a,b) => a['date_range'].slice(0,4) - b['date_range'].slice(0,4));
-    this.category = Coin.denominationToCategory(this.params['denomination']);
+    this.category   = Coin.denominationToCategory(denomination);
+    this.metalType  = Coin.denominationToMetalType(denomination);
+  }
+
+  setCurrentCoinImage(url: string) {
+    localStorage.setItem('genericImage', url);
   }
 
   handleError(failure) {

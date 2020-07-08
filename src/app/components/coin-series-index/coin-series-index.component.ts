@@ -11,12 +11,13 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class CoinSeriesIndexComponent implements OnInit {
-  coins          : Coin[];
-  isSorted       : boolean;
-  varietiesHidden: boolean;
-  mintmarkFilter : string;
-  filteredCoins  : Coin[];
-  mintmarks      : Set<string> = new Set("All");
+  coins           : Coin[];
+  isSorted        : boolean;
+  varietiesHidden : boolean;
+  mintmarkFilter  : string;
+  filteredCoins   : Coin[];
+  seriesImage     : string;
+  mintmarks       : Set<string> = new Set("All");
 
   params       = this.route.snapshot.params;
   denomination = this.params.denomination;
@@ -56,14 +57,19 @@ export class CoinSeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data: Coin[]) {
-    this.coins = data.map(json => Object.assign(new Coin(), json))
-    this.filteredCoins = this.coins;
-    this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
+    this.coins = data.map(json => Object.assign(new Coin(), json));
+    this.setComponentProperties();
     this.sortCoinsByProperty('year');
   }
 
   handleError(error) {
     console.log(error)
+  }
+
+  setComponentProperties() {
+    this.filteredCoins = this.coins;
+    this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
+    this.seriesImage = localStorage.getItem('genericImage');
   }
 
   filterDisplayedCoinsByMintmark(mark : string) {
