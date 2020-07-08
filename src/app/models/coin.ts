@@ -47,13 +47,27 @@ export class Coin {
       '$1': 'Silver Dollars',
       
       '$1G': 'Gold Dollars', 
-      '$2.50': 'Quarter Eagles', 
+      '$2.50': 'Quarter Eagles',
+      '$3': 'Three Dollars',
       '$5': 'Half Eagles', 
       '$10': 'Eagles', 
       '$20': 'Double Eagles' 
     }
 
     return categories[denomination];
+  }
+
+  static denominationToMetalType(denomination: string) {
+    const denominationMaterials = {
+      '1C': 'copper',
+      '5C': 'nickel',
+      '10C': 'silver',
+      '25C': 'silver',
+      '50C': 'silver',
+      '$1': 'silver',
+    }
+    
+    return denominationMaterials[denomination] || 'gold'
   }
 
   metal(): string {
