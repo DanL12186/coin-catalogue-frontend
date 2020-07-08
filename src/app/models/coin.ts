@@ -15,7 +15,8 @@ export class Coin {
     public designer?: string,
     public pcgs_population?: JSON,
     public pcgs_total?: number,
-    public special_designation?: string
+    public special_designation?: string,
+    public price_table?: JSON,
   ) {
       this.id = id;
       this.year = year;
@@ -33,6 +34,7 @@ export class Coin {
       this.pcgs_population = pcgs_population
       this.pcgs_total = pcgs_total
       this.special_designation = special_designation
+      this.price_table = price_table
   }
 
   static denominationToCategory(denomination: string): string {
