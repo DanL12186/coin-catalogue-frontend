@@ -10,7 +10,7 @@
 </h1>
 
 <div class='container text-center'>
-  <div> Mintage: {{ coin.mintage | number }} </div>
+  <div> Mintage: {{ coin.mintage ? (coin.mintage | number) : 'N/A' }} </div>
   <div> Composition: {{ coin.metals() | titlecase }} </div>
   <div> Designer: {{ coin.designer }} </div>
   <div> Diameter: {{ coin.diameter }} mm ({{ coin.diameter / 25.4 | number: '1.1-2' }} inches) </div> 
@@ -43,4 +43,6 @@
   </button>
 
   <div id="chartContainer" class='chart'></div>
+
+  <!-- <div id="priceChartContainer" class='chart'></div> -->
 </div>
