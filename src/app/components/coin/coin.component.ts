@@ -4,8 +4,7 @@ import { Coin } from '../../models/coin';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
-import { FormatChartDataService } from 'src/app/services/charts/format-chart-data.service';
-import { RenderChartService } from 'src/app/services/charts/render-chart.service';
+import { ChartService } from 'src/app/services/charts/chart.service';
 
 import Panzoom from '@panzoom/panzoom';
 import { GoldAndSilverPricesService } from 'src/app/services/data/gold-and-silver-prices.service';
@@ -24,12 +23,12 @@ export class CoinComponent implements OnInit {
   panzoom; 
   metalPrices;
   elem: HTMLElement;
+  chartData: Array<JSON>
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
               private titleService: Title,
-              private chartDataFormatService: FormatChartDataService,
-              private chartRenderService: RenderChartService,
+              private chartService: ChartService,
               private metalsPriceService: GoldAndSilverPricesService
              ) { }
 
@@ -60,8 +59,8 @@ export class CoinComponent implements OnInit {
     this.titleService.setTitle(`${this.coin.description()} ${this.coin.series}`)
 
     this.setComponentProperties();
-    this.chartRenderService.renderChart(this.formatChartData())
     this.enableZoom()
+    this.renderChart()
   }
 
   handlePriceResponse(data : JSON) {
@@ -77,15 +76,15 @@ export class CoinComponent implements OnInit {
     this.meltValue = this.coin.meltValue(this.metalPrices)
     this.ounces = this.coin.weightInOunces()
     this.coinDescription = this.coin.description()
+    this.chartData = this.formatChartData(this.coin.pcgs_population)
   }
 
-  formatChartData = () : JSON[] => {
-    return this.chartDataFormatService.format(this.coin.pcgs_population);
+  renderChart() {
+    this.chartService.renderChart(this.chartData)
   }
 
-  changeChartType = (chartType: string) => {
-    this.chartRenderService.chart.options.data[0].type = chartType;
-    this.chartRenderService.renderChart(this.formatChartData(), chartType)
+  formatChartData = (data: JSON) : JSON[] => {
+    return this.chartService.format(data);
   }
 
   enableZoom = () => {
@@ -100,4 +99,8 @@ export class CoinComponent implements OnInit {
     });
   }
 
+  changeChartType = (chartType: string): void => {
+    this.chartService.chart.options.data[0].type = chartType;
+    this.chartService.renderChart(this.chartData, chartType)
+  }
 }
