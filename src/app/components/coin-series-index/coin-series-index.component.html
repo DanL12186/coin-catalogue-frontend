@@ -28,19 +28,19 @@
     <tr>
       <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('year')">
-          {{ this.sortByLabels['year'] | titlecase }}
+          {{ sortByLabels['year'] | titlecase }}
         </button>
       </th>
 
       <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('mintage')">
-          {{ this.sortByLabels['mintage'] | titlecase }}
+          {{ sortByLabels['mintage'] | titlecase }}
         </button>
       </th>
 
       <th class='coins-table-header'>
         <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('pcgs_total')">
-          {{ this.sortByLabels['pcgs_total'] | titlecase }}
+          {{ sortByLabels['pcgs_total'] | titlecase }}
         </button>
       </th>
     </tr>
