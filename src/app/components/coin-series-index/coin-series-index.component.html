@@ -29,19 +29,19 @@
   <table class='container coins-table'>
     <tr>
       <th class='coins-table-header'>
-        <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('year')">
+        <button class='btn btn-sm presentational' (click)="sortCoinsByProperty('year')">
           {{ sortByLabels['year'] | titlecase }}
         </button>
       </th>
 
       <th class='coins-table-header'>
-        <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('mintage')">
+        <button class='btn btn-sm presentational' (click)="sortCoinsByProperty('mintage')">
           {{ sortByLabels['mintage'] | titlecase }}
         </button>
       </th>
 
       <th class='coins-table-header'>
-        <button class='btn btn-sm sort-btn' (click)="sortCoinsByProperty('pcgs_total')">
+        <button class='btn btn-sm presentational' (click)="sortCoinsByProperty('pcgs_total')">
           {{ sortByLabels['pcgs_total'] | titlecase }}
         </button>
       </th>

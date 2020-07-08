@@ -13,6 +13,17 @@
   }
 }
 
+.btn-sm.presentational {
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: rgba(207, 213, 231, 0.5);
+
+  &:focus {
+    background-color: rgba(4, 46, 124, 0.8);
+    color: white;
+  }
+}
+
 label {
   margin-right: 10px;
 }
