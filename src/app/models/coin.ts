@@ -62,6 +62,7 @@ export class Coin {
       '1C': 'copper',
       '5C': 'nickel',
       '10C': 'silver',
+      '20C': 'silver',
       '25C': 'silver',
       '50C': 'silver',
       '$1': 'silver',
