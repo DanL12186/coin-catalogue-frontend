@@ -5,6 +5,8 @@
     <div> {{ seriesName | titlecase }} </div>
   </h1>
 
+  <img class='coin-img' src="{{ seriesImage }}" draggable="false">
+
   <div>
     <label for='filter-by-mintmark'>Filter By Mintmark</label>
     <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter"
@@ -52,7 +54,7 @@
         </a>
       </td>
 
-      <td> ({{ coin.mintage | number }} minted) </td>
+      <td> {{ coin.mintage | number }} </td>
       <td> PCGS Population: {{ coin.pcgs_total || 0 }} </td>
     </tr>
 

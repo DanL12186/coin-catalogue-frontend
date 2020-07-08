@@ -1,4 +1,9 @@
 <div class='container-fluid text-center'>
+
+  <h1>
+    <a routerLink="/{{metalType}}"> {{ metalType | titlecase }} </a>
+  </h1>
+
   <h1 class='category-title'> {{ category }} </h1>
 
   <div class='row series-index-div'>
@@ -7,7 +12,7 @@
       <h2> {{ series['date_range'] }} </h2>
 
       <a routerLink="/coins/{{series['denomination']}}/{{series['name'] | slugify }}">
-        <img class="coin-img" src="{{ series['generic_img_url'] }}">
+        <img (click)="setCurrentCoinImage($event.target.src)" class="coin-img" src="{{ series['generic_img_url'] }}">
       </a>
     </div>
   </div>
