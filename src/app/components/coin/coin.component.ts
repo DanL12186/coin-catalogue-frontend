@@ -22,7 +22,7 @@ export class CoinComponent implements OnInit {
   meltValue: number;
   coinDescription = '';
   panzoom; 
-  prices;
+  metalPrices;
   elem: HTMLElement;
 
   constructor(private coinDataService: CoinDataService, 
@@ -30,20 +30,20 @@ export class CoinComponent implements OnInit {
               private titleService: Title,
               private chartDataFormatService: FormatChartDataService,
               private chartRenderService: RenderChartService,
-              private priceService: GoldAndSilverPricesService
+              private metalsPriceService: GoldAndSilverPricesService
              ) { }
 
   ngOnInit(): void {
     const params = this.route.snapshot.params;
 
-    this.prices = this.priceService.fromLocalStorage();
+    this.metalPrices = this.metalsPriceService.fromLocalStorage();
 
     this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{}, 0, '');
 
-    if (!this.prices) {
-      this.priceService
-        .getGoldSilverPrices()
-        .subscribe(data => this.handlePriceResponse(data));
+    if (!this.metalPrices) {
+      this.metalsPriceService
+          .getGoldSilverPrices()
+          .subscribe(data => this.handlePriceResponse(data));
     }
 
     this.coinDataService
@@ -60,12 +60,12 @@ export class CoinComponent implements OnInit {
     this.titleService.setTitle(`${this.coin.description()} ${this.coin.series}`)
 
     this.setComponentProperties();
-    this.displayChart(this.formatChartData())
+    this.chartRenderService.renderChart(this.formatChartData())
     this.enableZoom()
   }
 
   handlePriceResponse(data : JSON) {
-    this.prices = data
+    this.metalPrices = data
     localStorage.setItem('goldAndSilverPrices', JSON.stringify(data))
   }
 
@@ -74,25 +74,21 @@ export class CoinComponent implements OnInit {
   }
 
   setComponentProperties() {
-    this.meltValue = this.coin.meltValue(this.prices)
+    this.meltValue = this.coin.meltValue(this.metalPrices)
     this.ounces = this.coin.weightInOunces()
     this.coinDescription = this.coin.description()
   }
 
-  formatChartData = () => {
+  formatChartData = () : JSON[] => {
     return this.chartDataFormatService.format(this.coin.pcgs_population);
-  }
-
-  displayChart = (pcgsPopulationData, chartType = 'column') => {
-    return this.chartRenderService.renderChart(pcgsPopulationData, chartType)
   }
 
   changeChartType = (chartType: string) => {
     this.chartRenderService.chart.options.data[0].type = chartType;
-    this.displayChart(this.formatChartData(), chartType);
+    this.chartRenderService.renderChart(this.formatChartData(), chartType)
   }
 
-  enableZoom() {
+  enableZoom = () => {
     this.elem = document.getElementById('panzoom-image')
 
     this.panzoom = Panzoom(this.elem, { maxScale: 5, canvas: true })

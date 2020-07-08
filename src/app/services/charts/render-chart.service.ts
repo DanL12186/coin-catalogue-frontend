@@ -9,7 +9,7 @@ export class RenderChartService {
   
   constructor() { }
 
-  renderChart(chartData : JSON, chartType : string) {
+  renderChart(chartData : Array<JSON>, chartType : string = 'column') {
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title: {

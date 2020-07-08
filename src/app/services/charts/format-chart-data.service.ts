@@ -7,12 +7,12 @@ import { Injectable } from '@angular/core';
 export class FormatChartDataService {
   constructor() { }
 
-  format(data) {
+  format(data : JSON) : Array<JSON> {
     const formattedData = []
 
     for (const key in data) {
-      if (key && key !== 'total') {
-        const value = data[key] || 0
+      if (key !== 'total') {
+        const value = data[key]
 
         const dataPoint = { label: key, y: value }
 
