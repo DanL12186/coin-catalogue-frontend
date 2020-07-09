@@ -16,7 +16,8 @@ export class CoinSeriesIndexComponent implements OnInit {
   varietiesHidden : boolean;
   mintmarkFilter  : string;
   filteredCoins   : Coin[];
-  seriesImage     : string;
+  seriesObverse   : string;
+  seriesReverse   : string;
   mintmarks       : Set<string> = new Set("All");
 
   params       = this.route.snapshot.params;
@@ -69,7 +70,8 @@ export class CoinSeriesIndexComponent implements OnInit {
   setComponentProperties() {
     this.filteredCoins = this.coins;
     this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
-    this.seriesImage = localStorage.getItem('genericImage');
+    this.seriesObverse = localStorage.getItem('seriesObverse');
+    this.seriesReverse = localStorage.getItem('seriesReverse');
   }
 
   filterDisplayedCoinsByMintmark(mark : string) {
@@ -86,6 +88,11 @@ export class CoinSeriesIndexComponent implements OnInit {
     if (this.varietiesHidden) {
       this.hideVarieties('true');
     }
+  }
+
+  flip(card) {
+    console.log(card)
+    card.classList.toggle('is-flipped');
   }
 
   hideVarieties(filter) {

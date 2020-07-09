@@ -11,6 +11,47 @@ select {
   margin-top: 2em;
 }
 
-.coin-img {
+.flip-coin-img {
+  border-radius: 50%;
+  border-radius: 50%;
   width: 200px;
+  height: 200px;
+}
+
+.flip-coin {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  perspective: 10000px;
+}
+
+.flip-coin.div {
+    margin: auto;
+    margin-bottom: 2em;
+}
+
+.flip-coin-inner {
+  position: relative;
+  text-align: center;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flip-coin:hover .flip-coin-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-coin-front,
+.flip-coin-back {
+  margin: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-coin-back {
+  margin: auto;
+  transform: rotateY(180deg);
 }

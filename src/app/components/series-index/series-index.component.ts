@@ -41,8 +41,9 @@ export class SeriesIndexComponent implements OnInit {
     this.metalType  = Coin.denominationToMetalType(denomination);
   }
 
-  setCurrentCoinImage(url: string) {
-    localStorage.setItem('genericImage', url);
+  setCoinImages(obverse, reverse) {
+    localStorage.setItem('seriesObverse', obverse);
+    localStorage.setItem('seriesReverse', reverse);
   }
 
   handleError(failure) {
