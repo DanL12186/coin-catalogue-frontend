@@ -70,8 +70,8 @@ export class CoinSeriesIndexComponent implements OnInit {
   setComponentProperties() {
     this.filteredCoins = this.coins;
     this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
-    this.seriesObverse = localStorage.getItem('seriesObverse');
-    this.seriesReverse = localStorage.getItem('seriesReverse');
+    this.seriesObverse = sessionStorage.getItem('seriesObverse');
+    this.seriesReverse = sessionStorage.getItem('seriesReverse');
   }
 
   filterDisplayedCoinsByMintmark(mark : string) {

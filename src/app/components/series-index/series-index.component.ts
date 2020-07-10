@@ -42,8 +42,8 @@ export class SeriesIndexComponent implements OnInit {
   }
 
   setCoinImages(obverse, reverse) {
-    localStorage.setItem('seriesObverse', obverse);
-    localStorage.setItem('seriesReverse', reverse);
+    sessionStorage.setItem('seriesObverse', obverse);
+    sessionStorage.setItem('seriesReverse', reverse);
   }
 
   handleError(failure) {
