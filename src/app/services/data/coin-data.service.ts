@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Coin } from 'src/app/models/coin';
 import { Observable } from 'rxjs';
+import { apiURL } from '../../shared/location';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CoinDataService {
   getCoins(params): Observable<Coin[]> {
     const [denomination, series] = this.formatGetCoinsParams(params);
 
-    return this.http.get<Coin[]>(`http://localhost:3002/coins?denomination=${denomination}&series=${series}`)
+    return this.http.get<Coin[]>(`${apiURL}/coins?denomination=${denomination}&series=${series}`)
   }
 
   getCoin = params => {
@@ -22,7 +23,7 @@ export class CoinDataService {
     const [ year, mintmark, designation ] = this.formatGetCoinParams(yearMintmarkAndDesignation);
 
     return this.http.get<JSON>(
-      `http://localhost:3002/coin?denomination=${denomination}&year=${year}&mintmark=${mintmark}&special_designation=${designation}`
+      `${apiURL}/coin?denomination=${denomination}&year=${year}&mintmark=${mintmark}&special_designation=${designation}`
     )
   }
 
@@ -40,13 +41,13 @@ export class CoinDataService {
     return [denomination, series];
   }
 
-  private formatGetCoinParams(yearMintmarkAndDesignation): string[] {
-    const year        = yearMintmarkAndDesignation.slice(0, 4);
-    const mintmark    = (yearMintmarkAndDesignation.match(/(?<=\d{4}-)(CC|[C-S])/gi) || "").toString()
-    const designation = yearMintmarkAndDesignation.replace(year, '')
-                                                  .replace(/^-/,'')
-                                                  .replace(mintmark, '')
-                                                  .trim();
+  private formatGetCoinParams(coindDesc): string[] {
+    const year        = coindDesc.slice(0, 4);
+    const mintmark    = (coindDesc.match(/(?<=\d{4}-)(CC|[C-S])/gi) || "").toString()
+    const designation = coindDesc.replace(year, '')
+                                 .replace(/^-/,'')
+                                 .replace(mintmark, '')
+                                 .trim();
 
     return [year, mintmark, designation]
   }
