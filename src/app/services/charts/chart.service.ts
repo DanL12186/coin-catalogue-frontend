@@ -10,13 +10,18 @@ export class ChartService {
   
   constructor() { }
 
-  format(data: JSON): Array<JSON> {
+  format(data: JSON, prices: JSON = null): Array<JSON> {
     const formattedData = []
 
     for (const key in data) {
       if (key !== 'total') {
         const value = data[key]
         const dataPoint = { label: key, y: value }
+
+        //add prices as indexLabel if available
+        if (prices && prices[key]) {
+          dataPoint['indexLabel'] = `$${prices[key]}`
+        }
 
         formattedData.push(dataPoint)
       }
@@ -28,6 +33,9 @@ export class ChartService {
   }
 
   renderChart(chartData : Array<JSON>, chartType : string = 'column') {
+    if (chartType === 'pie') {
+      chartData = this.deepCopyDataAndRemoveIndexLabels(chartData);
+    }
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title: {
@@ -51,6 +59,16 @@ export class ChartService {
     while (!data[0]['y']) {
       data.shift()
     }
+  }
+
+  private deepCopyDataAndRemoveIndexLabels(chartData) {
+    const chartDataCopy = JSON.parse(JSON.stringify(chartData));
+
+    for (const object of chartDataCopy) {
+      delete object['indexLabel']
+    }
+
+    return chartDataCopy
   }
 
 }

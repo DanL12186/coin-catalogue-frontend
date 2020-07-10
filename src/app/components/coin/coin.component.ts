@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { ChartService } from 'src/app/services/charts/chart.service';
+import { baseURL } from '../../shared/location';
 
 import Panzoom from '@panzoom/panzoom';
 import { GoldAndSilverPricesService } from 'src/app/services/data/gold-and-silver-prices.service';
@@ -24,6 +25,7 @@ export class CoinComponent implements OnInit {
   metalPrices;
   elem: HTMLElement;
   chartData: Array<JSON>
+  baseURL = baseURL;
 
   constructor(private coinDataService: CoinDataService, 
               private route: ActivatedRoute,
@@ -84,7 +86,7 @@ export class CoinComponent implements OnInit {
   }
 
   formatChartData = (data: JSON) : JSON[] => {
-    return this.chartService.format(data);
+    return this.chartService.format(data, this.coin.price_table);
   }
 
   enableZoom = () => {
