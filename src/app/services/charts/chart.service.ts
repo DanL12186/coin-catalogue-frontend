@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as CanvasJS from '../../assets/canvasjs.min.js';
+import { deepCopyObject } from '../../shared/functions';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ChartService {
+  deepCopyObject = deepCopyObject;
   chart: CanvasJS;
   
   constructor() { }
@@ -33,7 +35,7 @@ export class ChartService {
   }
 
   renderChart(chartData : Array<JSON>, chartType : string = 'column') {
-    if (chartType === 'pie') {
+    if (chartType.match(/pie|doughnut/)) {
       chartData = this.deepCopyDataAndRemoveIndexLabels(chartData);
     }
     this.chart = new CanvasJS.Chart("chartContainer", {
@@ -43,8 +45,15 @@ export class ChartService {
       },
       data: [{
         type: chartType,
-        dataPoints: chartData
-      }]
+        dataPoints: chartData,
+      }],
+      axisY: {
+        title: "Number of Coins",
+        lineColor: 'silver'
+      },
+      axisX: {
+        title: "Grade"
+      }
     });
 
     this.chart.render();
@@ -61,8 +70,8 @@ export class ChartService {
     }
   }
 
-  private deepCopyDataAndRemoveIndexLabels(chartData) {
-    const chartDataCopy = JSON.parse(JSON.stringify(chartData));
+  deepCopyDataAndRemoveIndexLabels(chartData : any) {
+    const chartDataCopy = this.deepCopyObject(chartData)
 
     for (const object of chartDataCopy) {
       delete object['indexLabel']
