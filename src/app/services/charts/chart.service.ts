@@ -7,12 +7,12 @@ import { deepCopyObject } from '../../shared/functions';
 })
 
 export class ChartService {
-  deepCopyObject = deepCopyObject;
   chart: CanvasJS;
+  deepCopyObject: Function = deepCopyObject;
   
   constructor() { }
 
-  format(data: JSON, prices: JSON = null): Array<JSON> {
+  format(data: JSON, prices?: JSON): Array<JSON> {
     const formattedData = []
 
     for (const key in data) {
@@ -34,7 +34,8 @@ export class ChartService {
     return formattedData;
   }
 
-  renderChart(chartData : Array<JSON>, chartType : string = 'column') {
+  renderChart(chartData: Array<JSON>, chartType: string = 'splineArea') {
+    console.log(chartData)
     if (chartType.match(/pie|doughnut/)) {
       chartData = this.deepCopyDataAndRemoveIndexLabels(chartData);
     }
@@ -52,7 +53,7 @@ export class ChartService {
         lineColor: 'silver'
       },
       axisX: {
-        title: "Grade"
+        title: "Coin Grade"
       }
     });
 
@@ -70,7 +71,7 @@ export class ChartService {
     }
   }
 
-  deepCopyDataAndRemoveIndexLabels(chartData : any) {
+  private deepCopyDataAndRemoveIndexLabels(chartData: any) {
     const chartDataCopy = this.deepCopyObject(chartData)
 
     for (const object of chartDataCopy) {
