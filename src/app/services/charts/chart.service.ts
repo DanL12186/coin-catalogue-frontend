@@ -35,12 +35,12 @@ export class ChartService {
   }
 
   renderChart(chartData: Array<JSON>, chartType: string = 'splineArea') {
-    console.log(chartData)
     if (chartType.match(/pie|doughnut/)) {
       chartData = this.deepCopyDataAndRemoveIndexLabels(chartData);
     }
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
+      animationDuration: 1000,
       title: {
         text: "Rarity Curve"
       },
