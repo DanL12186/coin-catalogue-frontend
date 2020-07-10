@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { ChartService } from 'src/app/services/charts/chart.service';
-import { baseURL } from '../../shared/location';
+import { baseURL } from '../../shared/constants';
 
 import Panzoom from '@panzoom/panzoom';
 import { GoldAndSilverPricesService } from 'src/app/services/data/gold-and-silver-prices.service';
