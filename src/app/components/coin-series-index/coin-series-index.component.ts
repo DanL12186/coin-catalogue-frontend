@@ -34,6 +34,9 @@ export class CoinSeriesIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle(`${this.denomination} ${this.seriesName || this.category}`);
+    
+    this.seriesObverse = sessionStorage.getItem('seriesObverse');
+    this.seriesReverse = sessionStorage.getItem('seriesReverse');
 
     this.coinDataService
         .getCoins(this.params)
@@ -70,8 +73,6 @@ export class CoinSeriesIndexComponent implements OnInit {
   setComponentProperties() {
     this.filteredCoins = this.coins;
     this.mintmarks = new Set(this.coins.map(coin => coin.mintmark || 'All'))
-    this.seriesObverse = sessionStorage.getItem('seriesObverse');
-    this.seriesReverse = sessionStorage.getItem('seriesReverse');
   }
 
   filterDisplayedCoinsByMintmark(mark : string) {
