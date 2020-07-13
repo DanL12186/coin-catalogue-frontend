@@ -12,12 +12,13 @@ export class GoldAndSilverPricesService {
 
   //refactor this later into one method instead of fromLocalStorage and getGoldAndSilverPrices()
   fromLocalStorage() {
-    const priceObject = JSON.parse(localStorage.goldAndSilverPrices);
+    const serializedPrices: string = localStorage.goldAndSilverPrices;
 
-    if (priceObject) {
-      const last_update = priceObject.updated_at
+    if (serializedPrices) {
+      const priceObject = JSON.parse(serializedPrices);
+      const lastUpdate = priceObject.updated_at;
 
-      if (new Date().getTime() - new Date(last_update).getTime() > 86400000) {
+      if (new Date().getTime() - new Date(lastUpdate).getTime() > 86400000) {
         this.http.get<JSON>('${APIURL}/update_prices/');
         return null;
       } else {
