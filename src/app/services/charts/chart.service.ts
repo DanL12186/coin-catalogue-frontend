@@ -36,7 +36,7 @@ export class ChartService {
 
   renderChart(chartData: Array<JSON>, chartType: string = 'splineArea') {
     if (chartType.match(/pie|doughnut/)) {
-      chartData = this.deepCopyDataAndRemoveIndexLabels(chartData);
+      chartData = this.safelyRemoveIndexLabels(chartData);
     }
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
@@ -71,7 +71,7 @@ export class ChartService {
     }
   }
 
-  private deepCopyDataAndRemoveIndexLabels(chartData: any) {
+  private safelyRemoveIndexLabels(chartData: any) {
     const chartDataCopy = this.deepCopyObject(chartData)
 
     for (const object of chartDataCopy) {
