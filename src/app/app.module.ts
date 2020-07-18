@@ -13,6 +13,8 @@ import { GoldComponent } from '././components/gold/gold.component';
 import { SilverComponent } from '././components/silver/silver.component'
 import { FormsModule } from '@angular/forms';
 import { SeriesIndexComponent } from './components/series-index/series-index.component';
+import { SearchBarComponent } from './components/shared/search-bar/search-bar.component';
+import { OtherComponent } from './other/other.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { SeriesIndexComponent } from './components/series-index/series-index.com
     GoldComponent,
     SilverComponent,
     SeriesIndexComponent,
+    SearchBarComponent,
+    OtherComponent,
   ],
   imports: [
     BrowserModule,
