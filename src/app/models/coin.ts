@@ -44,6 +44,8 @@ export class Coin {
   static denominationToCategory(denomination: string): string {
     const categories = { 
       '1C': 'Pennies',
+      '2C': 'Two Cent Pieces',
+      '3C': 'Three Cent Pieces',
       '5C': 'Nickels',
       '10C': 'Dimes',
       '25C': 'Quarters',
@@ -63,7 +65,10 @@ export class Coin {
 
   static denominationToMetalType(denomination: string) {
     const denominationMaterials = {
+      '0.5C': 'copper',
       '1C': 'copper',
+      '2C': 'copper',
+      '3C': 'silver',
       '5C': 'nickel',
       '10C': 'silver',
       '20C': 'silver',
@@ -90,13 +95,13 @@ export class Coin {
     return Math.round(this.mass / 31.1035 * 100000) / 100000;
   }
 
-  meltValue(pricePerOunce : JSON): number {
-    if (!this.metal_composition || this.metal() === 'other') {
+  meltValue(pricesPerOunce : JSON): number {
+    if (!this.metal_composition || !pricesPerOunce || this.metal() === 'other') {
       return 0;
     }
 
     const purity = this.metal_composition[this.metal()] / 100
-    const value = this.weightInOunces() * purity * pricePerOunce[this.metal()]
+    const value = this.weightInOunces() * purity * pricesPerOunce[this.metal()]
 
     return Math.round(value * 100) / 100;
   }
@@ -110,6 +115,10 @@ export class Coin {
   }
 
   metals() : string {
+    if (this.metal_composition === null) {
+      return Coin.denominationToMetalType(this.denomination)
+    }
+
     const metals = [];
 
     for (const metal in this.metal_composition) {

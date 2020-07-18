@@ -67,6 +67,7 @@ export class CoinComponent implements OnInit {
 
   handlePriceResponse(data : JSON) {
     this.metalPrices = data
+    this.meltValue = this.coin.meltValue(this.metalPrices)
     localStorage.setItem('goldAndSilverPrices', JSON.stringify(data))
   }
 
