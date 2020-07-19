@@ -19,6 +19,7 @@ export class Coin {
     public price_table?: JSON,
     public next_coin?: string,
     public prev_coin?: string,
+    public survival_estimate?: JSON,
   ) {
       this.id = id;
       this.year = year;
@@ -39,6 +40,7 @@ export class Coin {
       this.price_table = price_table
       this.next_coin = next_coin
       this.prev_coin = prev_coin
+      this.survival_estimate = survival_estimate
   }
 
   static denominationToCategory(denomination: string): string {
