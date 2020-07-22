@@ -25,7 +25,10 @@ export class CoinSeriesIndexComponent implements OnInit {
   seriesName   = this.params.series?.split('-')?.join(' ');
   category     = Coin.denominationToCategory(this.denomination);
 
-  sortByLabels = { year: 'Sort By Year', mintage: 'Sort By Mintage', pcgs_total: 'Sort By PCGS Total' };
+  sortByLabels = { year: 'Sort By Year', 
+                   mintage: 'Sort By Mintage', 
+                   pcgs_total: 'Sort By PCGS Total', 
+                 };
   
   constructor(private route: ActivatedRoute,
               private coinDataService: CoinDataService,
@@ -89,11 +92,6 @@ export class CoinSeriesIndexComponent implements OnInit {
     if (this.varietiesHidden) {
       this.hideVarieties('true');
     }
-  }
-
-  flip(card) {
-    console.log(card)
-    card.classList.toggle('is-flipped');
   }
 
   hideVarieties(filter) {
