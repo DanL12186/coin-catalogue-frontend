@@ -1,8 +1,6 @@
 <h4 class='text-center'>
-  <a class='coin-nav' href="{{baseURL}}/coins/{{coin.denomination}}/{{ coin.series | slugify }}/{{ coin.prev_coin }}">
-    ← Previous Coin </a>
-  <a class='coin-nav' href="{{baseURL}}/coins/{{coin.denomination}}/{{ coin.series | slugify }}/{{ coin.next_coin }}">
-    Next Coin → </a>
+  <a class="coin-nav route-link" href (click)="navigateToAdjacentCoin(coin, 'prev')"> ← Previous Coin </a>
+  <a class="coin-nav route-link" href (click)="navigateToAdjacentCoin(coin, 'next')"> Next Coin → </a>
 </h4>
 
 <h1 class='text-center'> 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinDataService } from '../../services/data/coin-data.service';
 import { Coin } from '../../models/coin';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { ChartService } from 'src/app/services/charts/chart.service';
@@ -31,7 +31,8 @@ export class CoinComponent implements OnInit {
               private route: ActivatedRoute,
               private titleService: Title,
               private chartService: ChartService,
-              private metalsPriceService: GoldAndSilverPricesService
+              private metalsPriceService: GoldAndSilverPricesService,
+              private router: Router
              ) { }
 
   ngOnInit(): void {
@@ -82,7 +83,7 @@ export class CoinComponent implements OnInit {
     this.chartData = this.formatChartData(this.coin.pcgs_population)
   }
 
-  renderChart() {
+  renderChart = () => {
     this.chartService.renderChart(this.chartData)
   }
 
@@ -100,6 +101,16 @@ export class CoinComponent implements OnInit {
 
       deltaY > 0 ? this.panzoom.zoomOut(0.01 * deltaY) : this.panzoom.zoomIn(0.01 * deltaY)
     });
+  }
+
+  navigateToAdjacentCoin(coin, direction) {
+    event.preventDefault();
+    
+    const targetCoin = direction === 'next' ? coin.next_coin : coin.prev_coin
+    const series = coin.series.split(' ').join('-').toLowerCase()
+
+    this.router.navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate( [ `/coins/${coin.denomination}/${series}/${targetCoin}` ] ))
   }
 
   changeChartType = (chartType: string): void => {
