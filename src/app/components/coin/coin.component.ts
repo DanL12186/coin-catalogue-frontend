@@ -94,7 +94,7 @@ export class CoinComponent implements OnInit {
   enableZoom = () => {
     this.elem = document.getElementById('panzoom-image')
 
-    this.panzoom = Panzoom(this.elem, { maxScale: 5, canvas: true })
+    this.panzoom = Panzoom(this.elem, { maxScale: 6, minScale: 1, canvas: true })
 
     this.elem.parentElement.addEventListener('wheel', (zoom) => {
       const deltaY = zoom.deltaY;
