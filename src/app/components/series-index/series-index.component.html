@@ -7,11 +7,11 @@
   <h1 class='category-title'> {{ category }} </h1>
 
   <div class='row series-index-div'>
-    <div class='series col-sm-4' *ngFor="let series of seriesList">
+    <div class='series col-md-4' *ngFor="let series of seriesList">
       <h2> {{ series['name'] }} </h2>
       <h2> {{ series['date_range'] }} </h2>
 
-      <a (mouseenter)="setCoinImages(series['generic_img_url'], series['reverse_img_url'])" 
+      <a (click)="setCoinImages(series['generic_img_url'], series['reverse_img_url'])" 
          routerLink="/coins/{{series['denomination']}}/{{series['name'] | slugify }}">
          
         <img class="coin-img" 
