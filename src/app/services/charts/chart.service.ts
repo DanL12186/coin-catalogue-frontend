@@ -35,7 +35,7 @@ export class ChartService {
   }
 
   renderChart(chartData: Array<JSON>, chartType: string = 'splineArea') {
-    if (chartType.match(/pie|doughnut/)) {
+    if (/pie|doughnut/.test(chartType)) {
       chartData = this.safelyRemoveIndexLabels(chartData);
     }
     this.chart = new CanvasJS.Chart("chartContainer", {
