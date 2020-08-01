@@ -15,32 +15,6 @@ p {
   flex: 1;
 }
 
-.toolbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  background-color: #1976d2;
-  color: white;
-  font-weight: 600;
-}
-
-.toolbar img {
-  margin: 0 16px;
-}
-
-.toolbar #twitter-logo {
-  height: 40px;
-  margin: 0 16px;
-}
-
-.toolbar #twitter-logo:hover {
-  opacity: 0.8;
-}
-
 .content {
   display: flex;
   margin: 82px auto 32px;
@@ -72,17 +46,6 @@ svg#rocket-smoke {
   top: 10px;
   right: 180px;
   z-index: -10;
-}
-
-a,
-a:visited,
-a:hover {
-  color: #1976d2;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #125699;
 }
 
 footer {
@@ -118,9 +81,4 @@ svg#clouds {
     display: none;
     visibility: hidden;
   }
-}
-
-a.navlink {
-  padding-left: 15px;
-  color: white;
 }

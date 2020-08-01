@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { SeriesIndexComponent } from './components/series-index/series-index.component';
 import { SearchBarComponent } from './components/shared/search-bar/search-bar.component';
 import { OtherComponent } from './other/other.component';
+import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { OtherComponent } from './other/other.component';
     SeriesIndexComponent,
     SearchBarComponent,
     OtherComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,
