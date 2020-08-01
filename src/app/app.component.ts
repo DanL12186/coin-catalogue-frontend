@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ToolbarComponent } from '../app/components/shared/toolbar/toolbar.component';
 
 // import { enableProdMode } from '@angular/core';
 // enableProdMode();
