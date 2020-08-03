@@ -19,7 +19,7 @@ export class Coin {
     public price_table?: JSON,
     public next_coin?: string,
     public prev_coin?: string,
-    public survival_estimate?: JSON,
+    public survival_estimate?: string,
   ) {
       this.id = id;
       this.year = year;
