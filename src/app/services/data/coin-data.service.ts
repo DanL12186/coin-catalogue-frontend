@@ -51,4 +51,14 @@ export class CoinDataService {
 
     return [year, mintmark, designation]
   }
+
+  setCoins(coins) {
+    return coins.map(jsonCoin => {
+      const coin = Object.assign(new Coin(), jsonCoin)
+
+      coin.survival_estimate = coin.survival_estimate['total'].split('-')[0]
+
+      return coin
+    });
+  }
 }

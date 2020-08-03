@@ -70,11 +70,7 @@ export class CoinSeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data: Coin[]) {
-    this.coins = data.map(json => {
-      const coin = Object.assign(new Coin(), json)
-      coin.survival_estimate = coin.survival_estimate['total'].split('-')[0]
-      return coin
-    });
+    this.coins = this.coinDataService.setCoins(data);
     this.setComponentProperties();
     this.sortCoinsByProperty('year');
   }
