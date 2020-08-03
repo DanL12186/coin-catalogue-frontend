@@ -54,6 +54,12 @@
           {{ sortByLabels['pcgs_total'] | titlecase }}
         </button>
       </th>
+
+      <th class='coins-table-header'>
+        <button class='btn btn-sm presentational' (click)="sortCoinsByProperty('survival_estimate')">
+          {{ sortByLabels['survival_estimate'] | titlecase }}
+        </button>
+      </th>
     </tr>
 
     <tr *ngFor="let coin of filteredCoins" class='coin-idx-info'>
@@ -65,6 +71,7 @@
 
       <td> Minted: {{ coin.mintage ? (coin.mintage | number) : 'N/A' }} </td>
       <td> PCGS Population: {{ coin.pcgs_total || 0 }} </td>
+      <td> PCGS Survival Estimate: {{ coin.survival_estimate }} </td>
     </tr>
 
   </table>
