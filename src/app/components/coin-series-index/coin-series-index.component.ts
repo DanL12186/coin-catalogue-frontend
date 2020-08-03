@@ -29,6 +29,7 @@ export class CoinSeriesIndexComponent implements OnInit {
                    year: 'Sort By Year', 
                    mintage: 'Sort By Mintage', 
                    pcgs_total: 'Sort By PCGS Total', 
+                   survival_estimate: 'Sort By Survival Estimate'
                  }
   
   constructor(private route: ActivatedRoute,
@@ -69,7 +70,11 @@ export class CoinSeriesIndexComponent implements OnInit {
   }
 
   handleResponse(data: Coin[]) {
-    this.coins = data.map(json => Object.assign(new Coin(), json));
+    this.coins = data.map(json => {
+      const coin = Object.assign(new Coin(), json)
+      coin.survival_estimate = coin.survival_estimate['total'].split('-')[0]
+      return coin
+    });
     this.setComponentProperties();
     this.sortCoinsByProperty('year');
   }
