@@ -8,15 +8,15 @@
   <div class="flip-coin div">
     <div class="flip-coin-inner">
       <div class="flip-coin-front">
-        <img class="flip-coin-img" src="{{ seriesObverse }}" draggable="false">
+        <img class="flip-coin-img" src="{{ seriesObverse }}" draggable="false" alt="coin-front">
       </div>
       <div class="flip-coin-back">
-        <img class="flip-coin-img" src="{{ seriesReverse }}" draggable="false">
+        <img class="flip-coin-img" src="{{ seriesReverse }}" draggable="false" alt="coin-back">
       </div>
     </div>
   </div>
 
-  <div class="filter-btn-div">
+  <div class="filter-btn-div" *ngIf="mintmarks.size > 2">
     <label for='filter-by-mintmark'>Filter By Mintmark</label>
     <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter"
       (ngModelChange)="filterDisplayedCoinsByMintmark(mintmarkFilter)">
