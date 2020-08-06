@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="filter-btn-div" *ngIf="mintmarks.size > 2">
+  <div class="filter-btn-div" *ngIf="mintmarks.size > 1">
     <label for='filter-by-mintmark'>Filter By Mintmark</label>
     <select name="filter-by-mintmark" [(ngModel)]="mintmarkFilter"
       (ngModelChange)="filterDisplayedCoinsByMintmark(mintmarkFilter)">
