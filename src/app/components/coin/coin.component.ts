@@ -80,7 +80,10 @@ export class CoinComponent implements OnInit {
     this.meltValue = this.coin.meltValue(this.metalPrices)
     this.ounces = this.coin.weightInOunces()
     this.coinDescription = this.coin.description()
-    this.chartData = this.formatChartData(this.coin.pcgs_population)
+    
+    if (Object.keys(this.coin.pcgs_population).length) {
+      this.chartData = this.formatChartData(this.coin.pcgs_population)
+    }
   }
 
   renderChart = () => {
