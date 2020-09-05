@@ -42,6 +42,7 @@ export class CoinSeriesIndexComponent implements OnInit {
     
     this.seriesObverse = sessionStorage.getItem('seriesObverse');
     this.seriesReverse = sessionStorage.getItem('seriesReverse');
+    this.isSorted      = sessionStorage.getItem('isSorted') === "true";
 
     this.coinDataService
         .getCoins(this.params)
@@ -62,6 +63,9 @@ export class CoinSeriesIndexComponent implements OnInit {
 
     this.updateButton(property);
 
+    sessionStorage.setItem('isSorted', this.isSorted.toString());
+    sessionStorage.setItem('sortCriterion', property)
+    
     this.isSorted = !this.isSorted;
   }
 
@@ -72,7 +76,7 @@ export class CoinSeriesIndexComponent implements OnInit {
   handleResponse(data: Coin[]) {
     this.coins = this.coinDataService.setCoins(data);
     this.setComponentProperties();
-    this.sortCoinsByProperty('year');
+    this.sortCoinsByProperty(sessionStorage.sortCriterion || 'year');
   }
 
   handleError(error) {
