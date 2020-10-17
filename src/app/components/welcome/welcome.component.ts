@@ -13,7 +13,7 @@ export class WelcomeComponent implements OnInit {
   images: any[];
   scale = 1;
 
-  zoom = (): void => {
+  zoom = (event): void => {
     event.preventDefault();
 
     this.scale += event['deltaY'] * -0.01;
@@ -32,8 +32,8 @@ export class WelcomeComponent implements OnInit {
     this.images = <any> document.querySelectorAll('.coin-img')
 
     this.images.forEach(image => {
-      image.addEventListener('wheel', () => {
-        this.zoom();
+      image.addEventListener('wheel', (event) => {
+        this.zoom(event);
       })
     })
 

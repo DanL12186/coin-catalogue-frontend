@@ -71,7 +71,7 @@
 
       <td> Minted: {{ coin.mintage ? (coin.mintage | number) : 'N/A' }} </td>
       <td> PCGS Population: {{ coin.pcgs_total || 0 }} </td>
-      <td> PCGS Survival Estimate: {{ coin.survival_estimate }} </td>
+      <td> PCGS Survival Estimate: {{ coin.survival_estimate | number }} </td>
     </tr>
 
   </table>
