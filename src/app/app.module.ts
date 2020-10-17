@@ -16,6 +16,8 @@ import { SeriesIndexComponent } from './components/series-index/series-index.com
 import { SearchBarComponent } from './components/shared/search-bar/search-bar.component';
 import { OtherComponent } from './other/other.component';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
@@ -26,11 +28,13 @@ import { ToolbarComponent } from './components/shared/toolbar/toolbar.component'
     Slugify,
     CoinSeriesIndexComponent,
     GoldComponent,
+    LoginComponent,
     SilverComponent,
     SeriesIndexComponent,
     SearchBarComponent,
     OtherComponent,
     ToolbarComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

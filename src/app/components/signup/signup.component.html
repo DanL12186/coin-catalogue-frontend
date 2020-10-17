@@ -1,0 +1,12 @@
+<h1>Sign Up</h1>
+
+<div class='container'>
+  <div *ngIf='signupFailed' class='alert alert-warning text-center red'> {{ signupFailed['password'] }} {{signupFailed['name'] }} </div>
+
+  <form>
+    Username: <input type="text" name='username' [(ngModel)]="username" required>
+    Password: <input type='text' name='password' type='password' [(ngModel)]="password" required>
+
+    <button (click)=handleSignup(username,password)>Sign Up</button>
+  </form>
+</div>
