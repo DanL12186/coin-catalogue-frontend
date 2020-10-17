@@ -6,5 +6,6 @@
     <a routerLink="/gold" class=navlink>Gold Coins</a>
     <a routerLink="/other" class=navlink>Other Coins</a>
   </span>
-  
+  <a routerLink="/login" *ngIf="!this.authService.isLoggedIn()">Login</a>
+  <app-search-bar class="coin-search"></app-search-bar>
 </div>
