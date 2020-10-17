@@ -9,6 +9,7 @@ import { CoinComponent } from './components/coin/coin.component';
 import { OtherComponent } from './other/other.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { WishlistsComponent } from './components/wishlists/wishlists.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'silver', component: SilverComponent },
   { path: 'other', component: OtherComponent },
+  { path: 'wishlists', component: WishlistsComponent },
   { path: 'coins/:denomination', component: SeriesIndexComponent },
   { path: 'coins/:denomination/:series', component: CoinSeriesIndexComponent },
   { path: 'coins/:denomination/:series/:year-mintmark-and-designation', component: CoinComponent }

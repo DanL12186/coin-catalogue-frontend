@@ -1,0 +1,7 @@
+<h1>My Wishlists</h1>
+
+<div class='series col-md-4' *ngFor="let wishlist of wishlists">
+  <h4> 
+    <a routerLink="/wishlists/{{wishlist.id}}">{{wishlist.name}}</a>
+  </h4>
+</div>

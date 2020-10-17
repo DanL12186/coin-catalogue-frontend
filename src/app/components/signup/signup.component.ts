@@ -27,9 +27,9 @@ export class SignupComponent implements OnInit {
 
   handleResponse(data, username) {
     this.signupFailed = data;
-debugger;
+
     if (!this.signupFailed) {
-      sessionStorage.setItem('authenticatedUser', username);
+      localStorage.setItem('authenticatedUser', username);
 
       // this.router.navigate(['welcome', this.username]);
     }

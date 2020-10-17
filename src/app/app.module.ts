@@ -18,6 +18,7 @@ import { OtherComponent } from './other/other.component';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { WishlistsComponent } from './components/wishlists/wishlists.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SignupComponent } from './components/signup/signup.component';
     OtherComponent,
     ToolbarComponent,
     SignupComponent,
+    WishlistsComponent,
   ],
   imports: [
     BrowserModule,

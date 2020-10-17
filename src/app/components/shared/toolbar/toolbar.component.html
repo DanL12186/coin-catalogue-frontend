@@ -5,7 +5,9 @@
     <a routerLink="/silver" class=navlink>Silver Coins</a>
     <a routerLink="/gold" class=navlink>Gold Coins</a>
     <a routerLink="/other" class=navlink>Other Coins</a>
+    <a routerLink="/login" class='navlink' *ngIf="!this.authService.isLoggedIn()">Login</a>
+    <a routerLink="/wishlists" class='navlink' *ngIf="this.authService.isLoggedIn()">Wishlists</a>
   </span>
-  <a routerLink="/login" *ngIf="!this.authService.isLoggedIn()">Login</a>
+  
   <app-search-bar class="coin-search"></app-search-bar>
 </div>

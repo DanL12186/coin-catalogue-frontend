@@ -30,16 +30,15 @@ export class LoginComponent implements OnInit {
     const user = data;
 
     if (!this.invalidLogin) {
-      sessionStorage.setItem('authenticatedUser', username);
+      localStorage.setItem('authenticatedUser', username);
 
-      this.router.navigate(['welcome', this.username]);
+      this.router.navigate(['/']);
     }
   }
 
   handleError(failure) {
     this.invalidLogin = true;
     console.log(failure)
-    console.log("TTTHHHHHHHHHHHHHHBT")
   }
   
 
