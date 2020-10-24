@@ -20,6 +20,7 @@
   <div> Designer: {{ coin.designer }} </div>
   <div> Diameter: {{ coin.diameter }} mm ({{ coin.diameter / 25.4 | number: '1.1-2' }} inches) </div> 
   <div> Mass: {{ coin.mass }} grams ({{ ounces | number: '1.1-3' }} ounces) </div>
+  <div> Survival Estimate: {{ coin.survival_estimate['total'] }} </div>
   <div> PCGS Population: {{ coin.pcgs_total || 0 | number }} </div>
   <div *ngIf="meltValue"> Melt Value: {{ meltValue | currency }} </div>
   

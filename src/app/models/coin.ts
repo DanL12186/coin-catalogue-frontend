@@ -82,6 +82,10 @@ export class Coin {
     return denominationMaterials[denomination] || 'gold'
   }
 
+  static newBlank(): Coin {
+    return new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{}, 0, '', <JSON>{}, '', '', '');
+  }
+
   metal(): string {
     if (this.metal_composition['gold']) {
       return 'gold';

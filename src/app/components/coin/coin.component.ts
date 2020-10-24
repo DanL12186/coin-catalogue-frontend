@@ -40,7 +40,7 @@ export class CoinComponent implements OnInit {
 
     this.metalPrices = this.metalsPriceService.fromLocalStorage();
 
-    this.coin = new Coin(0, 0, '', '', '', 0, '', null, 0, '', 0.0, 0.0, 'designer', <JSON>{}, 0, '');
+    this.coin = Coin.newBlank()
 
     if (!this.metalPrices) {
       this.metalsPriceService
