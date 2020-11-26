@@ -21,17 +21,16 @@ export class WishlistsComponent implements OnInit {
     this.wishlistService
         .getUserWishlists()
         .subscribe(
-          data => this.handleWishlistResponse(data),
-          failure => this.handleWishlistError(failure)
+          data => this.handleWishlistsResponse(data),
+          failure => this.handleWishlistsError(failure)
         )
   }
 
-  handleWishlistResponse(data) {
-    console.log(data)
+  handleWishlistsResponse(data) {
     this.wishlists = data;
   }
 
-  handleWishlistError(failure) {
+  handleWishlistsError(failure) {
     console.log(failure);
   }
 

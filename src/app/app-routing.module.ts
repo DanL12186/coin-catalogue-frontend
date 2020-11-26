@@ -10,6 +10,7 @@ import { OtherComponent } from './other/other.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { WishlistsComponent } from './components/wishlists/wishlists.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'silver', component: SilverComponent },
   { path: 'other', component: OtherComponent },
   { path: 'wishlists', component: WishlistsComponent },
+  { path: 'wishlists/:id', component: WishlistComponent},
   { path: 'coins/:denomination', component: SeriesIndexComponent },
   { path: 'coins/:denomination/:series', component: CoinSeriesIndexComponent },
   { path: 'coins/:denomination/:series/:year-mintmark-and-designation', component: CoinComponent }

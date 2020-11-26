@@ -9,6 +9,7 @@ import { baseURL } from '../../shared/constants';
 
 import Panzoom from '@panzoom/panzoom';
 import { GoldAndSilverPricesService } from 'src/app/services/data/gold-and-silver-prices.service';
+import { WishlistDataService } from 'src/app/services/data/wishlist-data.service';
 
 @Component({
   selector: 'app-coin',
@@ -32,6 +33,7 @@ export class CoinComponent implements OnInit {
               private titleService: Title,
               private chartService: ChartService,
               private metalsPriceService: GoldAndSilverPricesService,
+              private wishlistDataService: WishlistDataService,
               private router: Router
              ) { }
 
@@ -114,6 +116,10 @@ export class CoinComponent implements OnInit {
 
     this.router.navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate( [ `/coins/${coin.denomination}/${series}/${targetCoin}` ] ))
+  }
+  
+  addToWishlist(wishlistId, coin) {
+    this.wishlistDataService.addCoinToWishlist(wishlistId, coin)
   }
 
   changeChartType = (chartType: string): void => {

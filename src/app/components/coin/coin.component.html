@@ -15,6 +15,7 @@
 </h1>
 
 <div class='container text-center'>
+  <a (click)="addToWishlist(1, coin)" class='btn btn-sm presentational'>Add To Wishlist</a>
   <div> Mintage: {{ coin.mintage ? (coin.mintage | number) : 'N/A' }} </div>
   <div> Composition: {{ coin.metals() | titlecase }} </div>
   <div> Designer: {{ coin.designer }} </div>
