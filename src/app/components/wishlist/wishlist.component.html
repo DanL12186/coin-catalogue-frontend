@@ -1,4 +1,7 @@
 <div *ngFor="let coin of wishlistCoins"> 
-  <div> {{ coin.description() }} {{ coin.denomination }} {{ coin.series }} </div>
+  <div style='margin-left: 20px;'> 
+    <a routerLink="/coins/{{ coin.denomination }}/{{ coin.series | slugify }}/{{ coin.description() }}">
+      {{ coin.description() }} {{ coin.denomination }} {{ coin.series }}
+    </a>
+  </div>
 </div>
-
