@@ -24,10 +24,7 @@ export class WishlistComponent implements OnInit {
   }
 
   handleWishlistResponse(data) {
-    this.wishlistCoins = data.map(jsonCoin => {
-      return Object.assign(new Coin(), jsonCoin)
-    })
-    console.log(this.wishlistCoins)
+    this.wishlistCoins = data.map(jsonCoin => Object.assign(new Coin(), jsonCoin))
   }
 
   handleWishlistError(failure) {
